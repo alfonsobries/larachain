@@ -1,12 +1,27 @@
-<x-app-layout>
+<x-guest-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-header title="Profile">
+            <x-slot name="breadcrumb">
+                <x-breadcrumb
+                    :back-url="route('welcome')"
+                    :items="[
+                        [
+                            'url' => route('welcome'),
+                            'label' => 'Home',
+                        ],
+                    ]"
+                />
+            </x-slot>
+        </x-header>
+    </x-slot>
+    {{-- <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Profile') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+    {{-- <div>
+        <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
             @livewire('profile.update-profile-information-form')
 
             <x-jet-section-border />
@@ -35,5 +50,5 @@
                 @livewire('profile.delete-user-form')
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </div> --}}
+</x-guest-layout>

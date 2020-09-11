@@ -22,7 +22,7 @@ class MainNavigation extends Component
                 'label' => 'Explorer',
             ],
             [
-                'href' => '#',
+                'href' => '',
                 'label' => 'About',
             ],
             [

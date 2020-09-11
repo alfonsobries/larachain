@@ -32,7 +32,7 @@
         <div class="pt-4 pb-3 border-t border-gray-200">
             <div class="flex items-center px-4 space-x-3">
                 <div class="flex-shrink-0">
-                    <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->getAvatar() }}" alt="User photo">
+                    <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="User photo">
                 </div>
                 <div>
                     <div class="text-base font-medium leading-6 text-gray-800">{{ auth()->user()->name }}</div>

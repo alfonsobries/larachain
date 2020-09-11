@@ -16,7 +16,7 @@
                 <button @click="open = !open"
                     class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300"
                     id="user-menu" aria-label="User menu" aria-haspopup="true" x-bind:aria-expanded="open">
-                    <img class="w-10 h-10 rounded-full" src="{{ auth()->user()->getAvatar() }}" alt="User photo">
+                    <img class="w-8 h-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="User photo">
                 </button>
             </div>
 
@@ -34,7 +34,7 @@
                 <div class="py-1 bg-white rounded-md shadow-xs" role="menu" aria-orientation="vertical"
                     aria-labelledby="user-menu">
 
-                    <a href="#"
+                    <a href="{{ route('profile.show') }}"
                         class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
                         role="menuitem">Your Profile</a>
 
