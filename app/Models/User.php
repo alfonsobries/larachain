@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function getAvatar()
     {
-        $hash = md5(strtolower($this->email));
+        $hash = md5(strtolower(trim($this->email)));
 
         return sprintf('https://www.gravatar.com/avatar/%s', $hash);
     }
