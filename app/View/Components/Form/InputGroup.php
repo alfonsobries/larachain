@@ -22,15 +22,24 @@ class InputGroup extends Component
     public string $for;
 
     /**
+     * 
+     * An optional error message
+     *
+     * @var string
+     */
+    public string $error;
+
+    /**
      * Create the component instance.
      *
      * @param  string  $label
      * @return void
      */
-    public function __construct($label = '', $for = '')
+    public function __construct($label = '', $for = '', $error = '')
     {
         $this->label = $label;
         $this->for = $for;
+        $this->error = $error;
     }
 
     /**

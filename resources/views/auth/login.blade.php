@@ -1,5 +1,4 @@
 <x-empty-layout>
-    
     <div class="flex flex-col items-center justify-center h-screen max-w-md py-10 mx-auto space-y-8">
         
         <x-link href="{{ route('welcome') }}" class="flex items-center mx-4 space-x-2 md:absolute md:top-5 md:left-5">
@@ -20,7 +19,7 @@
             <p class="text-center">
                 or 
                 <x-link href="{{ route('register') }}">
-                    already have an account?
+                    haven't signed up yet?
                 </x-link>
             </p>
         </div>
@@ -32,32 +31,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-
-                <x-form.input-group label="Email" for="email">
-                    <x-form.input name="email" id="email" />
-                </x-form.input-group>
-
-                <x-form.input-group label="Password" for="password">
-                    <x-form.input type="password" name="password" id="password" required />
-                </x-form.input-group>
-
-
-                <div class="flex items-center justify-end space-x-4">
-                    @if (Route::has('password.request'))
-                        <x-link href="{{ route('password.request') }}" class="text-sm">
-                            {{ __('Forgot your password?') }}
-                        </x-link>
-                    @endif
-
-                    <x-button type="submit">
-                        Login
-                    </x-button>
-                </div>
-            </form>
+            <livewire:auth.login />
         </x-card>
-
-        
     </div>
 </x-empty-layout>
