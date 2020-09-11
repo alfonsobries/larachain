@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Auth;
 
-use Livewire\Component;
+use App\Http\Livewire\Form;
 
-class Login extends Component
+class Login extends Form
 {
     public $email = '';
+
     public $password = '';
 
     public function login()
