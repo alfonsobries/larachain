@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<x-empty-layout>
+    <div class="min-h-screen bg-gray-100">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <x-layout.main-navigation />
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.2.1/dist/alpine.js" defer></script>
-    </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+        <div>
+            @isset($header)
+                <header class="py-10 bg-white shadow-sm">
+                    {{ $header }}
+                </header>
+            @endisset
+            <main>
+                <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {{ $slot }}
+                </div>
+            </main>
         </div>
-    </body>
-</html>
+    </div>
+</x-empty-layout>
