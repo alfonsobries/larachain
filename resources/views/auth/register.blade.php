@@ -25,12 +25,6 @@
         </div>
 
         <x-card>
-            @if (session('status'))
-                <div class="mb-8 text-sm font-medium text-green-600">
-                    {{ session('status') }}
-                </div>
-            @endif
-
             <livewire:auth.register />
         </x-card>
     </div>

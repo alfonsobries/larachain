@@ -14,7 +14,7 @@ class Input extends Component
      * 
      * @var string
      */
-    protected $fixedClasses = 'form-input block w-full';
+    protected $fixedClasses = 'form-input block w-full disabled:opacity-50 disabled:cursor-not-allowed';
     
     /**
      * Classes for default if no variant set

@@ -28,7 +28,7 @@ class Button extends Component
      * 
      * @var string
      */
-    protected $fixedClasses = 'transition duration-150 ease-in-out';
+    protected $fixedClasses = 'transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed';
     
     /**
      * Classes for default if no variant set
