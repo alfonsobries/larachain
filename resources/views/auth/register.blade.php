@@ -1,43 +1,37 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<x-empty-layout>
+    <div class="flex flex-col items-center justify-center h-screen max-w-md py-10 mx-auto space-y-8">
+        
+        <x-link href="{{ route('welcome') }}" class="flex items-center mx-4 space-x-2 md:absolute md:top-5 md:left-5">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            
+            <span>Back to home</span>
 
-        <x-jet-validation-errors class="mb-4" />
+            {{ \Route::is('/login')  }} 
+        </x-link>
+        
+        <x-logo class="mx-auto" />
+        
+        <div>
+            <x-title class="mb-2 text-center">
+                Sign in up to use advanced features
+            </x-title>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+            <p class="text-center">
+                or 
+                <x-link href="{{ route('login') }}">
+                    already have an account?
+                </x-link>
+            </p>
+        </div>
 
-            <div>
-                <x-jet-label value="Name" />
-                <x-jet-input class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+        <x-card>
+            @if (session('status'))
+                <div class="mb-8 text-sm font-medium text-green-600">
+                    {{ session('status') }}
+                </div>
+            @endif
 
-            <div class="mt-4">
-                <x-jet-label value="Email" />
-                <x-jet-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label value="Password" />
-                <x-jet-input class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label value="Confirm Password" />
-                <x-jet-input class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+            <livewire:auth.register />
+        </x-card>
+    </div>
+</x-empty-layout>
