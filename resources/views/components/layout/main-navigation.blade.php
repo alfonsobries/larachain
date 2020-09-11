@@ -32,11 +32,11 @@
                 </div>
             </div>
 
-            <x-layout.menu />
+            <livewire:user-menu />
 
             <x-layout.mobile-menu-button />
         </div>
     </div>
 
-    <x-layout.mobile-menu :menu-items="$menuItems" />
+    <livewire:mobile-user-menu :menu-items="$menuItems" />
 </nav>
