@@ -5,12 +5,9 @@ namespace App\Http\Livewire\Auth;
 use App\Models\User;
 use App\Http\Livewire\Form;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPassword extends Form
 {
-    use SendsPasswordResetEmails;
-    
     public $email = '';
     
     public $success = false;

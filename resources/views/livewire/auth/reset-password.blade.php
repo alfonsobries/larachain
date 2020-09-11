@@ -1,16 +1,5 @@
 <div>
-    <form wire:submit.prevent="register" action="#" method="POST">
-        <x-form.input-group label="Name" for="name" :error="$errors->first('name')">
-            <x-form.input
-                wire:model="name"
-                name="name"
-                id="name"
-                required
-                autofocus
-                :variant="$errors->has('name') ? 'error' : null"
-            />
-        </x-form.input-group>
-
+    <form wire:submit.prevent="submit" action="#" method="POST">
         <x-form.input-group label="Email" for="email" :error="$errors->first('email')">
             <x-form.input
                 wire:model="email"
@@ -23,7 +12,7 @@
             />
         </x-form.input-group>
         
-        <x-form.input-group label="Password" for="password" :error="$errors->first('password')">
+        <x-form.input-group label="Password" for="password" :error="$errors->first('password')" autocomplete="new-password">
             <x-form.input
                 wire:model="password"
                 type="password"
@@ -34,7 +23,7 @@
             />
         </x-form.input-group>
 
-        <x-form.input-group label="Confirm your password" for="password_confirmation" :error="$errors->first('password_confirmation')">
+        <x-form.input-group label="Confirm your password" for="password_confirmation" :error="$errors->first('password_confirmation')" autocomplete="new-password">
             <x-form.input
                 wire:model="password_confirmation"
                 type="password"
@@ -48,7 +37,7 @@
    
         <div class="flex items-center justify-end space-x-4">
             <x-button type="submit">
-                Register
+                {{ __('Reset Password') }}
             </x-button>
         </div>
     </form>
