@@ -35,7 +35,7 @@ class Button extends Component
      * 
      * @var string
      */
-    protected $defaultClasses = 'px-6 py-3 text-center text-sm leading-none text-white bg-gray-900 border border-transparent rounded-md focus:border-gray-600 focus:outline-none focus:shadow-outline-gray hover:bg-gray-600';
+    protected $defaultClasses = 'px-6 py-3 text-center text-sm leading-none text-white bg-gray-800 border border-transparent rounded-md focus:border-gray-600 focus:outline-none focus:shadow-outline-gray hover:bg-gray-600';
     
     /**
      * List of possible variants
@@ -43,7 +43,7 @@ class Button extends Component
      * @var array
      */
     protected $variants = [
-        'secondary' => 'px-6 py-3 text-center text-sm leading-none text-gray-500 bg-white border border-gray-200 rounded-md hover:border-gray-900 hover:text-gray-900 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:shadow-outline-gray'
+        'secondary' => 'px-6 py-3 text-center text-sm leading-none text-gray-500 bg-white border border-gray-200 rounded-md hover:border-gray-800 hover:text-gray-800 focus:border-gray-800 focus:text-gray-800 focus:outline-none focus:shadow-outline-gray'
     ];
 
     /**
