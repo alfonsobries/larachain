@@ -2,28 +2,27 @@
 
 namespace App\Http\Livewire;
 
-class BlockTable extends DynamicTable
+class TransactionsTable extends DynamicTable
 {
     public function mount($limit = 6, $page = 1)
     {
         parent::mount($limit, $page);
 
         $this->headers = [
-            'blockId' => 'Id',
-            'height' => 'Height',
+            'id' => 'Id',
             'timestamp' => 'Time',
-            'generator' => 'By',
+            'sender' => 'Sender',
+            'amount' => 'Amount',
         ];
         
         $this->orderable = [
-            'height',
             'timestamp',
         ];
     }
 
     protected function getApiUrl()
     {
-        $apiUrl = sprintf('%s/blocks', config('services.ark.endpoint'));
+        $apiUrl = sprintf('%s/transactions', config('services.ark.endpoint'));
         $query = $this->getQuery();
 
         if (count($query)) {
@@ -35,7 +34,7 @@ class BlockTable extends DynamicTable
 
     public function render()
     {
-        return view('livewire.block-table', [
+        return view('livewire.transactions-table', [
             'pagination' => $this->getPagination()
         ]);
     }

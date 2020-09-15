@@ -12,19 +12,20 @@
                     <tr>
                         <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
                             <x-tooltip :tooltip="$row['id']">
-                                <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="#">{{ $row['id'] }}
-                                </x-link>
+                                <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="#">{{ $row['id'] }}</x-link>
                             </x-tooltip>
-                        </td>
-                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
-                            <x-link href="#">{{ number_format($row['height']) }}</x-link>
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                             <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('Y-m-d') }}</span>
                             <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('H:i:s') }}</span>
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
-                            <x-link>{{ \Arr::get($row, 'generator.username', 'Unknown') }}</x-link>
+                            <x-tooltip :tooltip="$row['sender']">
+                                <x-link title="{{ $row['sender'] }}" class="block w-20 truncate" href="#">{{ $row['sender'] }}</x-link>
+                            </x-tooltip>
+                        </td>
+                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
+                            {{ number_format($row['amount']) }} Ѧ
                         </td>
                     </tr>
                 @endforeach
@@ -49,12 +50,6 @@
                         </x-tooltip>
                     </div>
                     <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        Height:
-                    </span>
-                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        <x-link href="#">{{ number_format($row['height']) }}</x-link>
-                    </div>
-                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
                         Time:
                     </span>
                     <div class="w-2/3 px-6 py-3 text-gray-500 ">
@@ -62,10 +57,30 @@
                         <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('H:i:s') }}</span>
                     </div>
                     <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        By:
+                        Sender:
                     </span>
                     <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        <x-link>{{ \Arr::get($row, 'generator.username', 'Unknown') }}</x-link>
+                        <x-tooltip :tooltip="$row['sender']">
+                            <x-link title="{{ $row['sender'] }}" class="block max-w-full truncate w-62" href="#">
+                                {{ $row['sender'] }}
+                            </x-link>
+                        </x-tooltip>
+                    </div>
+                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
+                        Recipient:
+                    </span>
+                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
+                        <x-tooltip :tooltip="$row['recipient']">
+                            <x-link title="{{ $row['recipient'] }}" class="block max-w-full truncate w-62" href="#">
+                                {{ $row['recipient'] }}
+                            </x-link>
+                        </x-tooltip>
+                    </div>
+                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
+                        Amount
+                    </span>
+                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
+                        {{ number_format($row['amount']) }} Ѧ
                     </div>
                 </div>
             @endforeach
