@@ -1,5 +1,6 @@
 <x-guest-layout>
     <x-slot name="header">
+        
         {{-- <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <nav class="sm:hidden">
                 <a href="#"
@@ -54,8 +55,7 @@
         </div> --}}
     </x-slot>
 
-    <div class="py-10">
-        
-        
+    <div class="px-4 py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <livewire:dashboard />        
     </div>
 </x-guest-layout>

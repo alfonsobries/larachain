@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ark' => [
+        'endpoint' => env('ARK_API_URL', 'https://dexplorer.ark.io/api'),
+    ],
+
 ];
