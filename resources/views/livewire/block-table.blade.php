@@ -1,9 +1,8 @@
 <div
     :page="request()->input('page', 1)"
     wire:init="loadBlocks"
-    wire:poll.10000ms="loadBlocks"
+    wire:poll.16000ms="loadBlocks"
     class="relative"
-    x-data="{ busy: false }"
 >
     @if ($pagination)
     <x-loader-overlay wire:loading.class="block" wire:loading.class.remove="hidden" />
