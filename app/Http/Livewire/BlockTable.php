@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -11,14 +12,20 @@ class BlockTable extends Component
     protected $response = null;
 
     public $headers = [
-        'id' => 'Id',
+        'blockId' => 'Id',
         'height' => 'Height',
         'timestamp' => 'Time',
         'generator' => 'By',
     ];
 
+    public $orderable = [
+        'height' => 'Height',
+        'timestamp' => 'Time',
+    ];
+
     public $limit;
     public $page = 1;
+    public $orderBy = null;
 
     public function mount($limit = 6, $page = 1)
     {
@@ -37,8 +44,22 @@ class BlockTable extends Component
     {
         return [
             'limit' => $this->limit,
-            'page' => $this->limit,
+            'page' => $this->page,
+            'orderBy' => $this->orderBy,
         ];
+    }
+
+    public function orderBy($orderBy)
+    {
+        if ($this->orderBy === $orderBy . ':asc') {
+            $this->orderBy =  $orderBy . ':desc';
+        } else if ($this->orderBy === ':desc') {
+            $this->orderBy =  null;
+        } else {
+            $this->orderBy = $orderBy . ':asc';
+        }
+
+        $this->loadBlocks();
     }
 
     public function nextPage()
