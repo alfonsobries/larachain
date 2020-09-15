@@ -1,4 +1,4 @@
-<div {{ $attributes }} class="absolute z-10 flex items-center justify-center hidden w-full h-full bg-white bg-opacity-25">
+<div {{ $attributes }} class="absolute z-20 items-center justify-center hidden w-full h-full bg-white bg-opacity-25">
     <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
