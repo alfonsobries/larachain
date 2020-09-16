@@ -4,9 +4,9 @@
     <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
         @switch($name)
             @case('id')
-                <x-tooltip :tooltip="$row['id']">
-                    <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="#">{{ $row['id'] }}</x-link>
-                </x-tooltip>
+                <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="{{ route('transactions.show', ['id' => $row['id']]) }}">
+                    {{ $row['id'] }}
+                </x-link>
                 @break
 
             @case('timestamp')
@@ -45,7 +45,9 @@
         @switch($name)
             @case('id')
                 <x-tooltip :tooltip="$row['id']">
-                    <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="#">{{ $row['id'] }}</x-link>
+                    <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="{{ route('transactions.show', ['id' => $row['id']]) }}">
+                        {{ $row['id'] }}
+                    </x-link>
                 </x-tooltip>
                 @break
 

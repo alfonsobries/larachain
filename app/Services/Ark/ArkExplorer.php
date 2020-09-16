@@ -122,6 +122,18 @@ class ArkExplorer
     }
 
     /** 
+     * Returns the block by id
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getBlock($id)
+    {
+        $enpdoint = self::getBlockEndpoint($id);
+        
+        return Http::get($enpdoint);
+    }
+
+    /** 
      * Returns the last block endpoint
      * 
      * @return \Illuminate\Http\Client\Response
@@ -132,13 +144,47 @@ class ArkExplorer
     }
 
     /** 
-     * Returns the block by id
+     * Returns the single transaction endpoint
      * 
      * @return \Illuminate\Http\Client\Response
      */
-    public static function getBlock($id)
+    public static function getTransactionEndpoint($id)
     {
-        $enpdoint = self::getBlockEndpoint($id);
+        return sprintf('%s/transactions/%s', self::getApiUrl(), $id);
+    }
+
+
+    /** 
+     * Returns the transaction by id
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getTransaction($id)
+    {
+        $enpdoint = self::getTransactionEndpoint($id);
+        
+        return Http::get($enpdoint);
+    }
+
+    /** 
+     * Returns the single transaction types endpint
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getTransactionTypesEndpoint()
+    {
+        return sprintf('%s/transactions/types', self::getApiUrl());
+    }
+
+
+    /** 
+     * Returns the transaction types
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getTransactionTypes()
+    {
+        $enpdoint = self::getTransactionTypesEndpoint();
         
         return Http::get($enpdoint);
     }
