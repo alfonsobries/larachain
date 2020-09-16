@@ -17,9 +17,11 @@ class TransactionsTable extends DynamicTable
 
     const ORDERABLE = [
         'timestamp',
+        'amount',
+        'fee',
     ];
 
-    public function mount($limit = 6, $page = 1, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE)
+    public function mount($limit = 20, $page = 1, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE)
     {
         parent::mount($limit, $page, $rows, $headers, $orderable);
     }

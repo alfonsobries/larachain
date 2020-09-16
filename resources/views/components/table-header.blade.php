@@ -2,7 +2,7 @@
     <tr>
         @foreach ($headers as $key => $header)
             <th id="{{ $key }}" class="text-left">
-                @if(\Arr::has($orderable, $key))
+                @if(in_array($key, $orderable))
                 <a
                     wire:click.prevent="orderBy('{{$key}}')"
                     class="flex justify-between px-4 py-2 text-xs font-semibold uppercase hover:text-blue-600 {{ \Str::startsWith($orderBy, $key) ? 'text-gray-700' : 'text-gray-400' }} "
