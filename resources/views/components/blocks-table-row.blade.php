@@ -10,7 +10,7 @@
                 @break
 
             @case('height')
-                <x-link href="#">{{ number_format($row['height']) }}</x-link>
+                {{ number_format($row['height']) }}
                 @break
 
             @case('transactions')
