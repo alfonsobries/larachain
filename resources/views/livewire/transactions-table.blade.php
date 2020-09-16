@@ -24,4 +24,13 @@
             @endforeach
         @endif
     </div>
+    
+    @if (!$hidePagination && $pagination)
+    <div class="hidden px-6 py-4 lg:block">
+        {{ $pagination->links() }}
+    </div>
+    <div class="px-6 py-4 lg:hidden">
+        {{ $pagination->links('pagination') }}
+    </div>
+    @endif
 </div>

@@ -13,7 +13,7 @@
                 </a>
             </x-title-h3>
             
-            <livewire:block-table :rows="['id', 'height', 'timestamp', 'generator']" :limit="6" />
+            <livewire:block-table :rows="['id', 'height', 'timestamp', 'generator']" :limit="6" :hide-pagination="true" />
         </div>
         <div class="bg-white rounded shadow">
             <x-title-h3 class="flex justify-between px-4 py-2 border-b border-gray-200">
@@ -26,7 +26,7 @@
                 </a>
             </x-title-h3>
             
-            <livewire:transactions-table  :rows="['id', 'timestamp', 'sender', 'amount']" :limit="6" />
+            <livewire:transactions-table  :rows="['id', 'timestamp', 'sender', 'amount']" :limit="6" :hide-pagination="true" />
         </div>
     </div>
 

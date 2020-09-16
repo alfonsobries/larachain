@@ -18,14 +18,19 @@ class BlockTable extends DynamicTable
             'timestamp',
     ];
 
-    public function mount($limit = 6, $page = 1, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE)
+    public function mount($limit = 6, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE, $hidePagination = false)
     {
-        parent::mount($limit, $page, $rows, $headers, $orderable);
+        parent::mount($limit, $rows, $headers, $orderable, $hidePagination);
     }
 
     public function getResponse()
     {
         return ArkExplorer::blocks($this->getQuery());
+    }
+
+    public function getPaginationRoute()
+    {
+        return route('blocks');
     }
 
     public function render()

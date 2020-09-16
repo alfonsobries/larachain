@@ -21,14 +21,19 @@ class TransactionsTable extends DynamicTable
         'fee',
     ];
 
-    public function mount($limit = 20, $page = 1, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE)
+    public function mount($limit = 20, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE, $hidePagination = false)
     {
-        parent::mount($limit, $page, $rows, $headers, $orderable);
+        parent::mount($limit, $rows, $headers, $orderable, $hidePagination);
     }
 
     public function getResponse()
     {
         return ArkExplorer::transactions($this->getQuery());
+    }
+
+    public function getPaginationRoute()
+    {
+        return route('transactions');
     }
 
     public function render()

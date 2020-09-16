@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class DynamicTable extends Component
 {
+    const PAGINATION_PATH = '/';
     protected $response = null;
 
     public $headers = [];
@@ -15,12 +16,14 @@ abstract class DynamicTable extends Component
     public $limit;
     public $page = 1;
     public $orderBy = null;
+    public $hidePagination = false;
 
-    public function mount($limit = 6, $page = 1, $rows = [], $headers = [], $orderable = [])
+    public function mount($limit = 6, $rows = [], $headers = [], $orderable = [], $hidePagination = false)
     {
         $this->limit = $limit;
-        $this->page = $page;
         
+        $this->page = request()->input('page', 1);
+
         if (count($rows)) {
             $this->headers = array_filter($headers, function ($key) use ($rows) {
                 return in_array($key, $rows);
@@ -30,6 +33,7 @@ abstract class DynamicTable extends Component
         }
         
         $this->orderable = $orderable;
+        $this->hidePagination = $hidePagination;
     }
 
     public function loadData()
@@ -59,20 +63,6 @@ abstract class DynamicTable extends Component
         $this->loadData();
     }
 
-    public function nextPage()
-    {
-        $this->page = $this->page + 1;
-
-        $this->loadData();
-    }
-
-    public function gotoPage($page)
-    {
-        $this->page = $page;
-
-        $this->loadData();
-    }
-
     protected function getPagination()
     {
         if (!$this->response) {
@@ -83,11 +73,14 @@ abstract class DynamicTable extends Component
             $this->response->json('data'),
             $this->response->json('meta.totalCount'),
             $this->response->json('meta.count'),
-            $this->page
+            $this->page,
+            ['path' => $this->getPaginationRoute()]
         );
     }
 
     abstract protected function getResponse();
 
+    abstract public function getPaginationRoute();
+    
     abstract public function render();
 }
