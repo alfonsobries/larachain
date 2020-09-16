@@ -9,25 +9,7 @@
         <tbody class="divide-y divide-gray-200">
             @if ($pagination)
                 @foreach ($pagination as $row)
-                    <tr>
-                        <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
-                            <x-tooltip :tooltip="$row['id']">
-                                <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="#">{{ $row['id'] }}</x-link>
-                            </x-tooltip>
-                        </td>
-                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
-                            <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('Y-m-d') }}</span>
-                            <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('H:i:s') }}</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
-                            <x-tooltip :tooltip="$row['sender']">
-                                <x-link title="{{ $row['sender'] }}" class="block w-20 truncate" href="#">{{ $row['sender'] }}</x-link>
-                            </x-tooltip>
-                        </td>
-                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
-                            {{ number_format($row['amount']) }} Ѧ
-                        </td>
-                    </tr>
+                <x-transactions-table-row :row="$row" :headers="$headers" />
                 @endforeach
             @else
                 <x-rows-loader :rows="$limit" :cols="count($headers)" />
@@ -38,51 +20,7 @@
     <div wire:key="responsive" class="flex flex-col">
         @if ($pagination)
             @foreach ($pagination as $row)
-                <div class="flex flex-wrap w-full md:hidden {{ $loop->odd ? 'bg-white' : 'bg-gray-100' }}">
-                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        ID:
-                    </span>
-                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        <x-tooltip :tooltip="$row['id']">
-                            <x-link title="{{ $row['id'] }}" class="block max-w-full truncate w-62" href="#">
-                                {{ $row['id'] }}
-                            </x-link>
-                        </x-tooltip>
-                    </div>
-                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        Time:
-                    </span>
-                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('Y-m-d') }}</span>
-                        <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('H:i:s') }}</span>
-                    </div>
-                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        Sender:
-                    </span>
-                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        <x-tooltip :tooltip="$row['sender']">
-                            <x-link title="{{ $row['sender'] }}" class="block max-w-full truncate w-62" href="#">
-                                {{ $row['sender'] }}
-                            </x-link>
-                        </x-tooltip>
-                    </div>
-                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        Recipient:
-                    </span>
-                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        <x-tooltip :tooltip="$row['recipient']">
-                            <x-link title="{{ $row['recipient'] }}" class="block max-w-full truncate w-62" href="#">
-                                {{ $row['recipient'] }}
-                            </x-link>
-                        </x-tooltip>
-                    </div>
-                    <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
-                        Amount
-                    </span>
-                    <div class="w-2/3 px-6 py-3 text-gray-500 ">
-                        {{ number_format($row['amount']) }} Ѧ
-                    </div>
-                </div>
+                <x-transactions-table-row :row="$row" :headers="$headers" :odd="$loop->odd" :responsive="true" />
             @endforeach
         @endif
     </div>

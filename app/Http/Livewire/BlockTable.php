@@ -4,12 +4,10 @@ namespace App\Http\Livewire;
 
 class BlockTable extends DynamicTable
 {
-    public function mount($limit = 6, $page = 1)
+    public function mount($limit = 6, $page = 1, $rows = [])
     {
-        parent::mount($limit, $page);
-
         $this->headers = [
-            'blockId' => 'Id',
+            'id' => 'Id',
             'height' => 'Height',
             'timestamp' => 'Time',
             'generator' => 'By',
@@ -19,6 +17,8 @@ class BlockTable extends DynamicTable
             'height',
             'timestamp',
         ];
+
+        parent::mount($limit, $page, $rows);
     }
 
     protected function getApiUrl()

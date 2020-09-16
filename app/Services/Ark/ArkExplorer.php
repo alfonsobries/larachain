@@ -16,7 +16,7 @@ class ArkExplorer
     const EPOCH_OFFSET = 1490101200;
     const AMOUNT_DECIMALS = 100000000;
 
-    protected function getTransactionsEndpoint(array $query = [])
+    public static function getTransactionsEndpoint(array $query = [])
     {
         $apiUrl = sprintf('%s/transactions', self::getApiUrl());
 
@@ -42,9 +42,9 @@ class ArkExplorer
      *
      * @return \Illuminate\Http\Client\Response`
      */
-    protected function fetchTransactions(array $query = [])
+    protected static function fetchTransactions(array $query = [])
     {
-        $enpdoint = $this->getTransactionsEndpoint();
+        $enpdoint = self::getTransactionsEndpoint($query);
 
         return Http::get($enpdoint);
     }
@@ -61,9 +61,9 @@ class ArkExplorer
         return Http::post($enpdoint, $query);
     }
 
-    public function transactions(array $query = [])
+    public static function transactions(array $query = [])
     {
-        $response = $this->fetchTransactions();
+        $response = self::fetchTransactions($query);
 
         return $response;
     }

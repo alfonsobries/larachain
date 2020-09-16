@@ -2,22 +2,31 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\Ark\ArkExplorer;
+
 class TransactionsTable extends DynamicTable
 {
-    public function mount($limit = 6, $page = 1)
-    {
-        parent::mount($limit, $page);
+    const HEADERS = [
+        'id' => 'Id',
+        'timestamp' => 'Time',
+        'sender' => 'Sender',
+        'recipient' => 'Recipient',
+        'amount' => 'Amount',
+        'fee' => 'Fee',
+    ];
 
-        $this->headers = [
-            'id' => 'Id',
-            'timestamp' => 'Time',
-            'sender' => 'Sender',
-            'amount' => 'Amount',
-        ];
-        
-        $this->orderable = [
-            'timestamp',
-        ];
+    const ORDERABLE = [
+        'timestamp',
+    ];
+
+    public function mount($limit = 6, $page = 1, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE)
+    {
+        parent::mount($limit, $page, $rows, $headers, $orderable);
+    }
+
+    public function getResponse()
+    {
+        return ArkExplorer::transactions($this->getQuery());
     }
 
     protected function getApiUrl()

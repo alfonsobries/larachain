@@ -16,17 +16,25 @@ abstract class DynamicTable extends Component
     public $page = 1;
     public $orderBy = null;
 
-    public function mount($limit = 6, $page = 1)
+    public function mount($limit = 6, $page = 1, $rows = [], $headers = [], $orderable = [])
     {
         $this->limit = $limit;
         $this->page = $page;
+        
+        if (count($rows)) {
+            $this->headers = array_filter($headers, function ($key) use ($rows) {
+                return in_array($key, $rows);
+            }, ARRAY_FILTER_USE_KEY);
+        } else {
+            $this->headers = $headers;
+        }
+        
+        $this->orderable = $orderable;
     }
 
     public function loadData()
     {
-        $apiUrl = $this->getApiUrl();
-
-        $this->response = Http::get($apiUrl);
+        $this->response = $this->getResponse();
     }
 
     protected function getQuery()
@@ -79,7 +87,7 @@ abstract class DynamicTable extends Component
         );
     }
 
-    abstract protected function getApiUrl();
-    
+    abstract protected function getResponse();
+
     abstract public function render();
 }

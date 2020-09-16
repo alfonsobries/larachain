@@ -1,7 +1,6 @@
-<x-guest-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         
-        {{-- <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <nav class="sm:hidden">
                 <a href="#"
                     class="flex items-center text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700">
@@ -52,10 +51,9 @@
                     </button>
                 </span>
             </div>
-        </div> --}}
-    </x-slot>
+        </div>
+    </x-slot> --}}
 
-    <div class="px-4 py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <livewire:dashboard />        
-    </div>
-</x-guest-layout>
+<div>
+    <livewire:dashboard />        
+</div>

@@ -14,14 +14,9 @@
             </x-slot>
         </x-header>
     </x-slot>
-    {{-- <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot> --}}
 
-    {{-- <div>
-        <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div>
+        <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-0">
             @livewire('profile.update-profile-information-form')
 
             <x-jet-section-border />
@@ -50,5 +45,5 @@
                 @livewire('profile.delete-user-form')
             </div>
         </div>
-    </div> --}}
+    </div>
 </x-guest-layout>
