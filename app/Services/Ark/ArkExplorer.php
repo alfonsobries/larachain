@@ -27,6 +27,17 @@ class ArkExplorer
         return $apiUrl;
     }
 
+    public static function getBlocksEndpoint(array $query = [])
+    {
+        $apiUrl = sprintf('%s/blocks', self::getApiUrl());
+
+        if (count($query)) {
+            return $apiUrl . '?' . http_build_query($query);
+        }
+
+        return $apiUrl;
+    }
+
     public static function getTransactionsSearchEndpoint()
     {
         return sprintf('%s/transactions/search', self::getApiUrl());
@@ -49,6 +60,14 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
+
+    public static function transactions(array $query = [])
+    {
+        $response = self::fetchTransactions($query);
+
+        return $response;
+    }
+
     /**
      * @param array $query
      *
@@ -59,13 +78,6 @@ class ArkExplorer
         $enpdoint = self::getTransactionsSearchEndpoint();
 
         return Http::post($enpdoint, $query);
-    }
-
-    public static function transactions(array $query = [])
-    {
-        $response = self::fetchTransactions($query);
-
-        return $response;
     }
 
     /** 
@@ -109,6 +121,26 @@ class ArkExplorer
         $enpdoint = self::lastBlockEndpoint();
         
         return Http::get($enpdoint);
+    }
+
+    /**
+     * @param array $query
+     *
+     * @return \Illuminate\Http\Client\Response`
+     */
+    protected static function fetchBlocks(array $query = [])
+    {
+        $enpdoint = self::getBlocksEndpoint($query);
+
+        return Http::get($enpdoint);
+    }
+
+
+    public static function blocks(array $query = [])
+    {
+        $response = self::fetchBlocks($query);
+
+        return $response;
     }
 
     /**

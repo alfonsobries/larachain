@@ -29,18 +29,6 @@ class TransactionsTable extends DynamicTable
         return ArkExplorer::transactions($this->getQuery());
     }
 
-    protected function getApiUrl()
-    {
-        $apiUrl = sprintf('%s/transactions', config('services.ark.endpoint'));
-        $query = $this->getQuery();
-
-        if (count($query)) {
-            return $apiUrl . '?' . http_build_query($query);
-        }
-
-        return $apiUrl;
-    }
-
     public function render()
     {
         return view('livewire.transactions-table', [

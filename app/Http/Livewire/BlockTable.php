@@ -2,35 +2,30 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\Ark\ArkExplorer;
+
 class BlockTable extends DynamicTable
 {
-    public function mount($limit = 6, $page = 1, $rows = [])
-    {
-        $this->headers = [
-            'id' => 'Id',
-            'height' => 'Height',
-            'timestamp' => 'Time',
-            'generator' => 'By',
-        ];
-        
-        $this->orderable = [
-            'height',
-            'timestamp',
-        ];
+    const HEADERS = [
+        'id' => 'Id',
+        'height' => 'Height',
+        'timestamp' => 'Time',
+        'generator' => 'By',
+    ];
 
-        parent::mount($limit, $page, $rows);
+    const ORDERABLE = [
+        'height',
+            'timestamp',
+    ];
+
+    public function mount($limit = 6, $page = 1, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE)
+    {
+        parent::mount($limit, $page, $rows, $headers, $orderable);
     }
 
-    protected function getApiUrl()
+    public function getResponse()
     {
-        $apiUrl = sprintf('%s/blocks', config('services.ark.endpoint'));
-        $query = $this->getQuery();
-
-        if (count($query)) {
-            return $apiUrl . '?' . http_build_query($query);
-        }
-
-        return $apiUrl;
+        return ArkExplorer::blocks($this->getQuery());
     }
 
     public function render()
