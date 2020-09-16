@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Charts;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Arr;
 use App\Services\Ark\ArkExplorer;
 
 class LatestTransactions extends Component
@@ -23,7 +24,7 @@ class LatestTransactions extends Component
         $dates = $this->getDates();
         
         $transactions = $this->getTransactions($dates);
-
+        
         $this->labels = $this->getLabels($dates);
         
         $this->data = $this->getData($transactions, $dates);
@@ -63,7 +64,7 @@ class LatestTransactions extends Component
         $from = $dates->last();
         $to = $dates->first();
 
-        return collect(collect((new ArkExplorer)->transactionsBetween($from, $to)->json())->get('data'));
+        return collect(Arr::get(ArkExplorer::transactionsBetween($from, $to), 'data'));
     }
 
     /**
@@ -96,9 +97,9 @@ class LatestTransactions extends Component
      */
     protected function getLastBlock()
     {
-        return (new ArkExplorer)->getLastBlock();
-        
+        return ArkExplorer::getLastBlock();
     }
+
     /**
      * Get the labels for the chart
      * 

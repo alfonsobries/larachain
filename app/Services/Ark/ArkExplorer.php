@@ -2,6 +2,7 @@
 
 namespace App\Services\Ark;
 
+use Mockery;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use App\Services\Ark\Testing\FakeArkExplorer;
@@ -18,7 +19,7 @@ class ArkExplorer
 
     protected function getTransactionsEndpoint(array $query = [])
     {
-        $apiUrl = sprintf('%s/transactions', $this->getApiUrl());
+        $apiUrl = sprintf('%s/transactions', self::getApiUrl());
 
         if (count($query)) {
             return $apiUrl . '?' . http_build_query($query);
@@ -27,12 +28,12 @@ class ArkExplorer
         return $apiUrl;
     }
 
-    protected function getTransactionsSearchEndpoint()
+    protected static function getTransactionsSearchEndpoint()
     {
-        return sprintf('%s/transactions/search', $this->getApiUrl());
+        return sprintf('%s/transactions/search', self::getApiUrl());
     }
 
-    protected function getApiUrl()
+    protected static function getApiUrl()
     {
         return config('services.ark.endpoint');
     }
@@ -54,9 +55,9 @@ class ArkExplorer
      *
      * @return \Illuminate\Http\Client\Response`
      */
-    public function searchTransactions(array $query = [])
+    public static function searchTransactions(array $query = [])
     {
-        $enpdoint = $this->getTransactionsSearchEndpoint();
+        $enpdoint = self::getTransactionsSearchEndpoint();
 
         return Http::post($enpdoint, $query);
     }
@@ -73,18 +74,18 @@ class ArkExplorer
      * @param \Carbon\Carbon $from
      * @param \Carbon\Carbon $to
      * 
-     * @return \Illuminate\Http\Client\Response
+     * @return array
      */
-    public function transactionsBetween(Carbon $from, Carbon $to)
+    public static function transactionsBetween(Carbon $from, Carbon $to)
     {
         $query = [
             'timestamp' => [
-                'from' => $this->getArkEpoch($from),
-                'to' => $this->getArkEpoch($to),
+                'from' => self::getArkEpoch($from),
+                'to' => self::getArkEpoch($to),
             ]
         ];
 
-        return $this->searchTransactions($query);
+        return self::searchTransactions($query)->json();
     }
 
     /** 
@@ -92,9 +93,22 @@ class ArkExplorer
      * 
      * @return \Illuminate\Http\Client\Response
      */
-    public function getLastBlock()
+    public static function lastBlockEndpoint()
     {
-        $enpdoint = sprintf('%s/blocks/last', $this->getApiUrl());
+        return sprintf('%s/blocks/last', self::getApiUrl());
+        
+        return Http::get($enpdoint);
+    }
+
+    /** 
+     * Returns the lat block
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getLastBlock()
+    {
+        $enpdoint = self::lastBlockEndpoint();
+        
         return Http::get($enpdoint);
     }
 
@@ -102,7 +116,7 @@ class ArkExplorer
      * Return the date timestamp with the same offset that ark uses
      * @return int
      */
-    protected function getArkEpoch(Carbon $date)
+    protected static function getArkEpoch(Carbon $date)
     {
         return $date->timestamp - self::EPOCH_OFFSET;
     }
@@ -110,6 +124,9 @@ class ArkExplorer
 
     public static function fake()
     {
-        return new FakeArkExplorer();
+        Http::fake([
+            self::lastBlockEndpoint() => FakeArkExplorer::getLastBlock(),
+            self::getTransactionsSearchEndpoint() => FakeArkExplorer::searchTransactions(),
+        ]);
     }
 }

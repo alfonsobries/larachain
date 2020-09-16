@@ -4,6 +4,8 @@ namespace Tests\Feature\Charts;
 
 use Tests\TestCase;
 use Livewire\Livewire;
+use App\Services\Ark\ArkExplorer;
+use Illuminate\Support\Facades\Http;
 
 class LatestTransactionsTest extends TestCase
 {
@@ -16,6 +18,8 @@ class LatestTransactionsTest extends TestCase
     /** @test */
     public function it_calculates_the_labels_for_the_day_view()
     {
+        ArkExplorer::fake();
+
         $now = now()->setTime(10, 30);
         
         $this->travelTo($now);
@@ -43,6 +47,8 @@ class LatestTransactionsTest extends TestCase
     /** @test */
     public function it_calculate_the_values_for_the_day_view()
     {
+        ArkExplorer::fake($this);
+        
         $now = now()->setTime(10, 30);
         
         $this->travelTo($now);
