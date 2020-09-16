@@ -10,15 +10,18 @@ class BlockTable extends DynamicTable
         'id' => 'Id',
         'height' => 'Height',
         'timestamp' => 'Time',
+        'transactions' => 'Transactions',
         'generator' => 'By',
+        'forged' => 'Forged',
+        'fees' => 'Fees',
     ];
 
     const ORDERABLE = [
         'height',
-            'timestamp',
+        'timestamp',
     ];
 
-    public function mount($limit = 6, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE, $hidePagination = false)
+    public function mount($limit = 20, $rows = [], $headers = self::HEADERS, $orderable = self::ORDERABLE, $hidePagination = false)
     {
         parent::mount($limit, $rows, $headers, $orderable, $hidePagination);
     }
