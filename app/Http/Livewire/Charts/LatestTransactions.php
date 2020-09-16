@@ -86,8 +86,8 @@ class LatestTransactions extends Component
                 }
             });
 
-            return $datesInRange->sum('fee') / ArkExplorer::AMOUNT_DECIMALS;
-        });
+            return $datesInRange->sum('amount') / ArkExplorer::AMOUNT_DECIMALS;
+        })->values()->toArray();
     }
     
     /**

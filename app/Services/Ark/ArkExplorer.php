@@ -2,7 +2,6 @@
 
 namespace App\Services\Ark;
 
-use Mockery;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use App\Services\Ark\Testing\FakeArkExplorer;
@@ -28,7 +27,7 @@ class ArkExplorer
         return $apiUrl;
     }
 
-    protected static function getTransactionsSearchEndpoint()
+    public static function getTransactionsSearchEndpoint()
     {
         return sprintf('%s/transactions/search', self::getApiUrl());
     }
@@ -122,11 +121,11 @@ class ArkExplorer
     }
     
 
-    public static function fake()
+    public static function fake($override = [])
     {
-        Http::fake([
+        Http::fake(array_merge([
             self::lastBlockEndpoint() => FakeArkExplorer::getLastBlock(),
             self::getTransactionsSearchEndpoint() => FakeArkExplorer::searchTransactions(),
-        ]);
+        ], $override));
     }
 }

@@ -30,24 +30,29 @@ class FakeArkExplorer extends ArkExplorer
 
     public static function searchTransactions(array $query = [])
     {
-        $body = collect(range(1, 6))->map(function () {
-            return self::buildBlock();
+        $data = collect(range(1, 3))->map(function () {
+            return self::buildTransaction();
         });
+
+        $body = [
+            'meta' => [],
+            'data' => $data,
+        ];
 
         return Http::response($body, 200);
     }
 
     /** 
-     * Returns the lat block
+     * Build a random block
      * 
      * @return \Illuminate\Http\Client\Response
      */
-    public static function buildBlock()
+    public static function buildBlock($overrides = [])
     {
         $faker = Factory::create();
         $date = $faker->dateTimeBetween('-1 day');
 
-        return [
+        return array_merge([
             "id" => $faker->sha256,
             "version" => 0,
             "height" => $faker->numberBetween(1, 6425405),
@@ -75,7 +80,40 @@ class FakeArkExplorer extends ArkExplorer
                 "unix" => $date->getTimestamp(),
                 "human" => $date->format(DateTime::ISO8601)
             ]
-        ];
+        ], $overrides);
+    }
+
+    /** 
+     * Build a random transaction
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function buildTransaction($overrides = [])
+    {
+        $faker = Factory::create();
+        $date = $faker->dateTimeBetween('-1 day');
+
+        return array_merge([
+            "id" => $faker->sha256,
+            "blockId" => $faker->sha256,
+            "version" => 2,
+            "type" => 0,
+            "typeGroup" => 1,
+            "amount" => $faker->numberBetween(0, 16000000),
+            "fee" => $faker->numberBetween(0, 160000),
+            "sender" => $faker->sha256,
+            "senderPublicKey" => $faker->sha256,
+            "recipient" => $faker->sha256,
+            "signature" => $faker->sha256,
+            "vendorField" => $faker->text,
+            "confirmations" => $faker->numberBetween(0, 300),
+            "timestamp" => [
+                "epoch" => $date->getTimestamp() - ArkExplorer::EPOCH_OFFSET,
+                "unix" => $date->getTimestamp(),
+                "human" => $date->format(DateTime::ISO8601)
+            ],
+            "nonce" =>  $faker->numberBetween(1, 10000)
+        ], $overrides);
     }
 
     /** 
