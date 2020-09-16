@@ -1,3 +1,5 @@
+<livewire:charts.latest-transactions view="day" />
+
 <div class="flex flex-col space-y-4 xl:space-y-0 xl:grid-cols-2 xl:gap-4 xl:grid">
     <div class="bg-white rounded shadow">
         <x-title-h3 class="flex justify-between px-4 py-2 border-b border-gray-200">
