@@ -100,25 +100,45 @@ class ArkExplorer
     }
 
     /** 
-     * Returns the lat block
+     * Returns the last block endpoint
      * 
      * @return \Illuminate\Http\Client\Response
      */
     public static function lastBlockEndpoint()
     {
         return sprintf('%s/blocks/last', self::getApiUrl());
-        
-        return Http::get($enpdoint);
     }
 
     /** 
-     * Returns the lat block
+     * Returns the last block
      * 
      * @return \Illuminate\Http\Client\Response
      */
     public static function getLastBlock()
     {
         $enpdoint = self::lastBlockEndpoint();
+        
+        return Http::get($enpdoint);
+    }
+
+    /** 
+     * Returns the last block endpoint
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getBlockEndpoint($id)
+    {
+        return sprintf('%s/blocks/%s', self::getApiUrl(), $id);
+    }
+
+    /** 
+     * Returns the block by id
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getBlock($id)
+    {
+        $enpdoint = self::getBlockEndpoint($id);
         
         return Http::get($enpdoint);
     }

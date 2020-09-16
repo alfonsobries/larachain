@@ -5,7 +5,7 @@
         @switch($name)
             @case('id')
                 <x-tooltip :tooltip="$row['id']">
-                    <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="#">{{ $row['id'] }}</x-link>
+                    <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="{{ route('blocks.show', ['id' => $row['id']]) }}">{{ $row['id'] }}</x-link>
                 </x-tooltip>
                 @break
 
