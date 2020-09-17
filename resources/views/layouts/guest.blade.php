@@ -18,7 +18,7 @@
 
         <footer>
             <x-container>
-                <div class="flex items-center justify-center font-mono text-center text-gray-600">
+                <div class="flex items-center justify-center font-mono text-sm text-center text-gray-600">
                     <span class="items-center hidden px-3 sm:inline-flex">
                         Made with
                         <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mx-1 text-red-800">

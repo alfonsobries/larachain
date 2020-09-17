@@ -27,7 +27,6 @@
         />
     </x-form.input-group>
 
-
     <div class="flex items-center justify-end space-x-4">
         @if (Route::has('password.request'))
             <x-link href="{{ route('password.request') }}" class="text-sm">
