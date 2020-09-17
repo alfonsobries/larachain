@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    @if(auth()->user() && auth()->user()->dark)
+    class="dark"
+    @endif
+>
 
 <head>
     <meta charset="utf-8">
