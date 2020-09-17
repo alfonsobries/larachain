@@ -39,15 +39,11 @@ class LatestTransactions extends Component
      */
     protected function getDates()
     {
-        // @TODO: grab this from the user settings
-        // if (auth()->user()) {
-        //     $now = now()->setTimezone('America/Mexico_City');
-        // } else {
-        //     $now = now();
-        // }
-
-        // $now = now()->setTimezone('America/Mexico_City');
-        $now = now();
+        if ($user = auth()->user()) {
+            $now = now()->setTimezone($user->timezone);
+        } else {
+            $now = now();
+        }
 
         return collect(range(0, 11))->map(function ($index) use ($now) {
             return $now->copy()->startOfHour()->subHour($index * 2);
