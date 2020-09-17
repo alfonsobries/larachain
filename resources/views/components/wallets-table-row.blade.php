@@ -4,8 +4,11 @@
     <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
         @switch($name)
             @case('address')
-                <x-link title="{{ $row['address'] }}" class="block w-20 truncate" href="{{ route('wallets.show', ['id' => $row['address']]) }}">
-                    {{ $row['address'] }}
+                <x-link title="{{ $row['address'] }}" class="block" href="{{ route('wallets.show', ['id' => $row['address']]) }}">
+                    @if($username = \Arr::get($row, 'username'))
+                    <span>{{ $username }} - </span>
+                    @endif
+                    <span>{{ $row['address'] }}</span>
                 </x-link>
                 @break
 
