@@ -21,7 +21,7 @@
                 <div class="flex items-center justify-center font-mono text-center text-gray-600">
                     <span class="items-center hidden px-3 sm:inline-flex">
                         Made with
-                        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mx-1 text-red-300">
+                        <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mx-1 text-red-800">
                             <path fill-rule="evenodd"
                                 d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                                 clip-rule="evenodd"></path>
@@ -32,7 +32,7 @@
                         class="px-3 text-gray-500 underline border-gray-300 sm:border-l">
                         About
                     </a>
-                    <a rel="noopener" href="https://github.com/alfonsobries/pending" target="_blank"
+                    <a rel="noopener" href="https://github.com/alfonsobries/larachain" target="_blank"
                         class="inline-flex items-center px-3 text-gray-500 underline border-l border-gray-300"><svg
                             width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 mr-2">
                             <path
