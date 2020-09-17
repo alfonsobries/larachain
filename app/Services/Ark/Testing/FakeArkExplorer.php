@@ -12,23 +12,12 @@ use App\Services\Ark\Testing\Responses\Transactions;
 
 class FakeArkExplorer extends ArkExplorer
 {
-    // public function __contruct($data = [])
-    // {
-    //     # code...
-    // }
-
-    /**
-     * @param array $query
-     *
-     * @return \App\Services\Ark\Testing\Responses\Transactions`
-     */
-    protected function fetchTransactions(array $query = [])
+    public static function searchTransactions(array $query = [])
     {
-        return new Transactions(200, [
-        ]);
+        return self::transactions($query);
     }
 
-    public static function searchTransactions(array $query = [])
+    public static function transactions(array $query = [])
     {
         $data = collect(range(1, 3))->map(function () {
             return self::buildTransaction();
@@ -40,6 +29,26 @@ class FakeArkExplorer extends ArkExplorer
         ];
 
         return Http::response($body, 200);
+    }
+
+    /** 
+     * Returns the wallets
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWallets()
+    {
+        return Http::response([], 200);
+    }
+
+    /** 
+     * Returns the wallets
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWallet($id)
+    {
+        return Http::response([], 200);
     }
 
     /** 

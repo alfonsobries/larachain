@@ -304,6 +304,9 @@ class ArkExplorer
         Http::fake(array_merge([
             self::lastBlockEndpoint() => FakeArkExplorer::getLastBlock(),
             self::getTransactionsSearchEndpoint() => FakeArkExplorer::searchTransactions(),
+            self::getTransactionsEndpoint() => FakeArkExplorer::transactions(),
+            self::getWalletsEndpoint() => FakeArkExplorer::getWallets(),
+            self::getWalletEndpoint('*') => FakeArkExplorer::getWallet('*'),
         ], $override));
     }
 }

@@ -18,9 +18,40 @@ class ArkExplorerTest extends TestCase
     /** @test */
     public function can_get_transactions()
     {
-        $arkExplorer = ArkExplorer::fake();
+        ArkExplorer::fake();
 
-        $response = $arkExplorer->transactions();
+        $response = ArkExplorer::transactions();
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }    
+
+    /** @test */
+    public function can_get_last_block()
+    {
+        ArkExplorer::fake();
+
+        $response = ArkExplorer::getLastBlock();
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    }    
+
+    /** @test */
+    public function can_search_for_transactions()
+    {
+        ArkExplorer::fake();
+
+        $response = ArkExplorer::searchTransactions();
+        
+        $this->assertEquals(200, $response->getStatusCode());
+    
+    
+    }    
+    /** @test */
+    public function can_get_wallet_transactions()
+    {
+        ArkExplorer::fake();
+
+        $response = ArkExplorer::getWalletTransactions(1);
         
         $this->assertEquals(200, $response->getStatusCode());
     }    
