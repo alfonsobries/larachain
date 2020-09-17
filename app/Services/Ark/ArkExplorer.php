@@ -155,7 +155,7 @@ class ArkExplorer
     }
 
     /** 
-     * Returns the single transaction endpoint
+     * Returns the single wallet endpoint
      * 
      * @return \Illuminate\Http\Client\Response
      */
@@ -164,15 +164,42 @@ class ArkExplorer
         return sprintf('%s/wallets/%s', self::getApiUrl(), $id);
     }
 
-
     /** 
-     * Returns the transaction by id
+     * Returns the wallet by id
      * 
      * @return \Illuminate\Http\Client\Response
      */
     public static function getWallet($id)
     {
         $enpdoint = self::getWalletEndpoint($id);
+
+        return Http::get($enpdoint);
+    }
+
+    /** 
+     * Returns the single wallet endpoint
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWalletTransactionsEndpoint($id, array $query = [])
+    {
+        $apiUrl = sprintf('%s/wallets/%s/transactions', self::getApiUrl(), $id);
+
+        if (count($query)) {
+            return $apiUrl . '?' . http_build_query($query);
+        }
+
+        return $apiUrl;
+    }
+
+    /** 
+     * Returns the wallet by id
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWalletTransactions($id, array $query = [])
+    {
+        $enpdoint = self::getWalletTransactionsEndpoint($id, $query);
 
         return Http::get($enpdoint);
     }

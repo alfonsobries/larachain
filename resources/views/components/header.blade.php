@@ -10,6 +10,10 @@
             </h2>
         </div>
 
+        @isset($right)
+        {{ $right }}
+        @endisset
+    
         @if(count($actions))
         <div class="flex flex-shrink-0 mt-4 space-x-4 md:mt-0 md:ml-4">
             @foreach($actions as $action)
