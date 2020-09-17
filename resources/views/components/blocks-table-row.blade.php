@@ -28,7 +28,7 @@
                 <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('H:i:s') }}</span>
                 @break
             @case('generator')
-                <x-link>{{ \Arr::get($row, 'generator.username', 'Unknown') }}</x-link>
+                <x-link href="{{ route('wallets.show', ['id' => \Arr::get($row, 'generator.address')]) }}">{{ \Arr::get($row, 'generator.username', 'Unknown') }}</x-link>
                 @break
         @endswitch
     </td>
@@ -49,7 +49,7 @@
                 @break
 
             @case('height')
-                <x-link href="#">{{ number_format($row['height']) }}</x-link>
+                {{ number_format($row['height']) }}
                 @break
 
             @case('transactions')
@@ -67,7 +67,7 @@
                 <span>{{ \Carbon\Carbon::createFromTimestamp($row['timestamp']['unix'])->format('H:i:s') }}</span>
                 @break
             @case('generator')
-                <x-link>{{ \Arr::get($row, 'generator.username', 'Unknown') }}</x-link>
+                <x-link href="{{ route('wallets.show', ['id' => \Arr::get($row, 'generator.address')]) }}">{{ \Arr::get($row, 'generator.username', 'Unknown') }}</x-link>
                 @break
         @endswitch
     </div>

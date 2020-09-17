@@ -15,12 +15,12 @@
                 @break
             @case('sender')
                 <x-tooltip :tooltip="$row['sender']">
-                    <x-link title="{{ $row['sender'] }}" class="block w-20 truncate" href="#">{{ $row['sender'] }}</x-link>
+                    <x-link title="{{ $row['sender'] }}" class="block w-20 truncate" href="{{ route('wallets.show', ['id' => $row['sender']]) }}">{{ $row['sender'] }}</x-link>
                 </x-tooltip>
                 @break
             @case('recipient')
                 <x-tooltip :tooltip="$row['recipient']">
-                    <x-link title="{{ $row['recipient'] }}" class="block w-20 truncate" href="#">{{ $row['recipient'] }}</x-link>
+                    <x-link title="{{ $row['recipient'] }}" class="block w-20 truncate" href="{{ route('wallets.show', ['id' => $row['recipient']]) }}">{{ $row['recipient'] }}</x-link>
                 </x-tooltip>
                 @break
             @case('amount')
@@ -57,12 +57,12 @@
                 @break
             @case('sender')
                 <x-tooltip :tooltip="$row['sender']">
-                    <x-link title="{{ $row['sender'] }}" class="block w-20 truncate" href="#">{{ $row['sender'] }}</x-link>
+                    <x-link title="{{ $row['sender'] }}" class="block w-20 truncate" href="{{ route('wallets.show', ['id' => $row['sender']]) }}">{{ $row['sender'] }}</x-link>
                 </x-tooltip>
                 @break
             @case('recipient')
                 <x-tooltip :tooltip="$row['recipient']">
-                    <x-link title="{{ $row['recipient'] }}" class="block w-20 truncate" href="#">{{ $row['recipient'] }}</x-link>
+                    <x-link title="{{ $row['recipient'] }}" class="block w-20 truncate" href="{{ route('wallets.show', ['id' => $row['recipient']]) }}">{{ $row['recipient'] }}</x-link>
                 </x-tooltip>
                 @break
             @case('amount')

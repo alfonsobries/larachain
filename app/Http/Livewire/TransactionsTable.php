@@ -28,7 +28,7 @@ class TransactionsTable extends DynamicTable
 
     public function getResponse()
     {
-        return ArkExplorer::walletTransactions($this->getQuery());
+        return ArkExplorer::transactions($this->getQuery());
     }
 
     public function getPaginationRoute()
