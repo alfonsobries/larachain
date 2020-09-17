@@ -1,7 +1,7 @@
 @if(!$responsive)
 <tr>
     @foreach($headers as $name => $label)
-    <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap">
+    <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap dark:text-gray-300">
         @switch($name)
             @case('id')
                 <x-link title="{{ $row['id'] }}" class="block w-20 truncate" href="{{ route('transactions.show', ['id' => $row['id']]) }}">
@@ -36,7 +36,7 @@
     @endforeach
 </tr>
 @else
-<div class="flex flex-wrap w-full md:hidden {{ $odd ? 'bg-white' : 'bg-gray-100' }}">
+<div class="flex flex-wrap w-full md:hidden {{ $odd ? 'bg-white dark:bg-gray-800' : 'bg-white dark:bg-gray-700' }}">
     @foreach($headers as $name => $label)
     <span class="w-1/3 px-6 py-3 text-sm font-semibold text-gray-500 uppercase">
         {{ $label }}

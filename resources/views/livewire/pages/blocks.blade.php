@@ -14,6 +14,6 @@
     </x-header>
 </x-slot>
 
-<div class="w-full bg-white shadow">
+<div class="w-full bg-white shadow dark:bg-gray-900">
     <livewire:block-table />
 </div>

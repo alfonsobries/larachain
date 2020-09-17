@@ -7,7 +7,7 @@ module.exports = {
         darkModeVariant: true
     },
 
-    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
+    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php', './View/Components/*/*.php'],
 
     theme: {
         extend: {

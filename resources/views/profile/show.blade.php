@@ -16,7 +16,7 @@
     </x-slot>
 
     <div>
-        <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-0">
+        <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-0 dark:bg-gray-200 dark:mt-10 dark:rounded">
             @livewire('profile.update-profile-information-form')
 
             <hr class="my-4 border-t" />

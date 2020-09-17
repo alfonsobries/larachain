@@ -21,7 +21,7 @@ class Input extends Component
      * 
      * @var string
      */
-    protected $defaultClasses = 'p-3 text-gray-800 ';
+    protected $defaultClasses = 'p-3 text-gray-800 bg-white dark:bg-gray-700 dark:border-gray-800 dark:text-gray-200';
     
     /**
      * List of possible variants

@@ -12,11 +12,11 @@
         <x-logo class="mx-auto" />
         
         <div class="px-8">
-            <x-title class="mb-2 text-center">
+            <x-title class="mb-2 text-center dark:text-gray-200">
                 Reset your password
             </x-title>
 
-            <p>
+            <p class="dark:text-gray-200">
                 {{ __('You almost done. Please set a new password for you user') }}
             </p>
         </div>

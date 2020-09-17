@@ -1,9 +1,9 @@
 <div>
     <livewire:charts.latest-transactions />
 
-    <div class="flex flex-col space-y-4 dark:bg-red-500 xl:space-y-0 xl:grid-cols-2 xl:gap-4 xl:grid">
-        <div class="bg-white rounded shadow">
-            <x-title-h3 class="flex justify-between px-4 py-2 border-b border-gray-200">
+    <div class="flex flex-col space-y-4 xl:space-y-0 xl:grid-cols-2 xl:gap-4 xl:grid">
+        <div class="bg-white rounded shadow dark:bg-gray-900">
+            <x-title-h3 class="flex justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-800">
                 Latest blocks
 
                 <a href="{{ route('blocks') }}" class="flex items-center px-2 text-sm text-blue-600 rounded border-200 hover:bg-blue-100">
@@ -15,8 +15,8 @@
             
             <livewire:block-table :rows="['id', 'height', 'timestamp', 'generator']" :limit="6" :hide-pagination="true" />
         </div>
-        <div class="bg-white rounded shadow">
-            <x-title-h3 class="flex justify-between px-4 py-2 border-b border-gray-200">
+        <div class="bg-white rounded shadow dark:bg-gray-900">
+            <x-title-h3 class="flex justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-800">
                 Latest transactions
 
                 <a href="{{ route('transactions') }}" class="flex items-center px-2 text-sm text-blue-600 rounded border-200 hover:bg-blue-100">

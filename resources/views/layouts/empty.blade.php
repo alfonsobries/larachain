@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.2.1/dist/alpine.js" defer></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-gray-800">
     {{ $slot }}
 
     @livewireScripts

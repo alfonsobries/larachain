@@ -43,7 +43,7 @@ class Button extends Component
      * @var array
      */
     protected $variants = [
-        'secondary' => 'px-6 py-3 text-center text-sm leading-none text-gray-500 bg-white border border-gray-200 rounded-md hover:border-gray-800 hover:text-gray-800 focus:border-gray-800 focus:text-gray-800 focus:outline-none focus:shadow-outline-gray'
+        'secondary' => 'px-6 py-3 text-center text-sm leading-none text-gray-500 border border-gray-200 dark:border-gray-700 rounded-md hover:border-gray-800 hover:text-gray-800 dark:hover:text-gray-600 focus:border-gray-800 focus:text-gray-800 focus:outline-none focus:shadow-outline-gray'
     ];
 
     /**

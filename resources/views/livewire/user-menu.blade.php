@@ -38,7 +38,7 @@
                         class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
                         role="menuitem">Settings</a>
                         
-                                            <button
+                    <button
                         wire:loading.attr="disabled"
                         wire:click="logout"
                         class="w-full px-4 py-2 text-sm text-left text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 disabled:opacity-50"

@@ -12,11 +12,11 @@
         <x-logo class="mx-auto" />
         
         <div>
-            <x-title class="mb-2 text-center">
+            <x-title class="mb-2 text-center dark:text-gray-200">
                 Sign in up to use advanced features
             </x-title>
 
-            <p class="text-center">
+            <p class="text-center dark:text-gray-200">
                 or 
                 <x-link href="{{ route('login') }}">
                     already have an account?
