@@ -28,7 +28,9 @@
                         </svg>
                         by
                         <a rel="noopener" href="https://www.alfonsobribiesca.com/" target="_blank"
-                            class="ml-1 text-gray-500 underline dark:text-gray-300">Alfonso Bribiesca</a></span> <a href="/about"
+                            class="ml-1 text-gray-500 underline dark:text-gray-300">Alfonso Bribiesca</a></span>
+                        <a  rel="noopener" href="https://github.com/alfonsobries/larachain"
+                        target="_blank"
                         class="px-3 text-gray-500 underline border-gray-300 dark:text-gray-300 sm:border-l">
                         About
                     </a>
