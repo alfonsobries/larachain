@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class DynamicTable extends Component

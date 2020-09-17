@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <x-header title="{{ $transaction['id'] }}">
+    <x-header title="{{ $wallet['address'] }}">
         <x-slot name="breadcrumb">
             <x-breadcrumb :back-url="route('transactions')" :items="[
                     [
@@ -7,14 +7,14 @@
                         'label' => 'Home',
                     ],
                     [
-                        'url' => route('transactions'),
-                        'label' => 'Transactions',
+                        'url' => route('wallets'),
+                        'label' => 'Wallets',
                     ],
                 ]" />
         </x-slot>
     </x-header>
 </x-slot>
-<div class="overflow-hidden bg-white shadow sm:rounded-md">
+{{-- <div class="overflow-hidden bg-white shadow sm:rounded-md">
     <ul>
         @foreach ($rows as $name => $label)
             <li class="px-4 py-4 transition duration-150 ease-in-out transaction hover:bg-gray-50 sm:px-6">
@@ -63,4 +63,4 @@
             </li>
         @endforeach
     </ul>
-</div>
+</div> --}}

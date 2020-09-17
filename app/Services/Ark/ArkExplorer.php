@@ -16,6 +16,17 @@ class ArkExplorer
     const EPOCH_OFFSET = 1490101200;
     const AMOUNT_DECIMALS = 100000000;
 
+    public static function getWalletsEndpoint(array $query = [])
+    {
+        $apiUrl = sprintf('%s/wallets', self::getApiUrl());
+
+        if (count($query)) {
+            return $apiUrl . '?' . http_build_query($query);
+        }
+
+        return $apiUrl;
+    }
+
     public static function getTransactionsEndpoint(array $query = [])
     {
         $apiUrl = sprintf('%s/transactions', self::getApiUrl());
@@ -117,7 +128,7 @@ class ArkExplorer
     public static function getLastBlock()
     {
         $enpdoint = self::lastBlockEndpoint();
-        
+
         return Http::get($enpdoint);
     }
 
@@ -129,7 +140,7 @@ class ArkExplorer
     public static function getBlock($id)
     {
         $enpdoint = self::getBlockEndpoint($id);
-        
+
         return Http::get($enpdoint);
     }
 
@@ -148,11 +159,53 @@ class ArkExplorer
      * 
      * @return \Illuminate\Http\Client\Response
      */
+    public static function getWalletEndpoint($id)
+    {
+        return sprintf('%s/wallets/%s', self::getApiUrl(), $id);
+    }
+
+
+    /** 
+     * Returns the transaction by id
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWallet($id)
+    {
+        $enpdoint = self::getWalletEndpoint($id);
+
+        return Http::get($enpdoint);
+    }
+
+    /** 
+     * Returns the single transaction endpoint
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
     public static function getTransactionEndpoint($id)
     {
         return sprintf('%s/transactions/%s', self::getApiUrl(), $id);
     }
 
+        /**
+     * @param array $query
+     *
+     * @return \Illuminate\Http\Client\Response`
+     */
+    protected static function fetchWallets(array $query = [])
+    {
+        $enpdoint = self::getWalletsEndpoint($query);
+
+        return Http::get($enpdoint);
+    }
+
+
+    public static function wallets(array $query = [])
+    {
+        $response = self::fetchWallets($query);
+
+        return $response;
+    }
 
     /** 
      * Returns the transaction by id
@@ -162,7 +215,7 @@ class ArkExplorer
     public static function getTransaction($id)
     {
         $enpdoint = self::getTransactionEndpoint($id);
-        
+
         return Http::get($enpdoint);
     }
 
@@ -185,7 +238,7 @@ class ArkExplorer
     public static function getTransactionTypes()
     {
         $enpdoint = self::getTransactionTypesEndpoint();
-        
+
         return Http::get($enpdoint);
     }
 
@@ -217,7 +270,7 @@ class ArkExplorer
     {
         return $date->timestamp - self::EPOCH_OFFSET;
     }
-    
+
 
     public static function fake($override = [])
     {

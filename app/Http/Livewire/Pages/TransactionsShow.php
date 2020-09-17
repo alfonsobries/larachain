@@ -20,6 +20,8 @@ class TransactionsShow extends Component
     ];
 
     protected $transaction;
+    protected $sender;
+    protected $recipient;
     public $actions;
     public $transactionType;
     public $rows;
@@ -27,10 +29,12 @@ class TransactionsShow extends Component
     public function mount()
     {
         $transaction = ArkExplorer::getTransaction(request()->id)->json('data');
-        
-        $this->transaction = $transaction;
+
         $this->transactionType = $this->getTransactionType($transaction);
+        $this->sender = $this->getWallet($transaction['sender']);
+        $this->recipient = $this->getWallet($transaction['recipient']);
         $this->rows = self::ROWS;
+        $this->transaction = $transaction;
     }
 
     protected function getTransactionType($transaction)
@@ -39,10 +43,17 @@ class TransactionsShow extends Component
         return array_flip($transactionTypes[$transaction['typeGroup']])[$transaction['type']];
     }
 
+    protected function getWallet($id)
+    {
+        return ArkExplorer::getWallet($id)->json('data');
+    }
+
     public function render()
     {
         return view('livewire.pages.transactions.show', [
-            'transaction' => $this->transaction
+            'transaction' => $this->transaction,
+            'sender' => $this->sender,
+            'recipient' => $this->recipient,
         ])->layout('layouts.guest');
     }
 }
