@@ -20,7 +20,7 @@ class WalletsShow extends Component
     ];
 
     protected $wallet;
-    
+
     public function mount()
     {
         $this->wallet = ArkExplorer::getWallet(request()->id)->json('data');

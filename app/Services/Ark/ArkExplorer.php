@@ -181,9 +181,9 @@ class ArkExplorer
      * 
      * @return \Illuminate\Http\Client\Response
      */
-    public static function getWalletTransactionsEndpoint($id, array $query = [])
+    public static function getWalletTransactionsEndpoint($id, array $query = [], $modifier = '')
     {
-        $apiUrl = sprintf('%s/wallets/%s/transactions', self::getApiUrl(), $id);
+        $apiUrl = sprintf('%s/wallets/%s/transactions%s', self::getApiUrl(), $id, $modifier);
 
         if (count($query)) {
             return $apiUrl . '?' . http_build_query($query);
@@ -197,9 +197,9 @@ class ArkExplorer
      * 
      * @return \Illuminate\Http\Client\Response
      */
-    public static function getWalletTransactions($id, array $query = [])
+    public static function getWalletTransactions($id, array $query = [], $modifier = '')
     {
-        $enpdoint = self::getWalletTransactionsEndpoint($id, $query);
+        $enpdoint = self::getWalletTransactionsEndpoint($id, $query, $modifier);
 
         return Http::get($enpdoint);
     }
