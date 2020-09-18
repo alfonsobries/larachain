@@ -29,9 +29,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    
     'ark' => [
-        'endpoint' => env('ARK_API_URL', 'https://dexplorer.ark.io/api'),
+        'mainnet' => env('ARK_MAINNET', 'https://explorer.ark.io/api'),
+        'devnet' => env('ARK_DEVNET', 'https://dexplorer.ark.io/api'),
     ],
 
 ];

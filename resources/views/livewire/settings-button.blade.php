@@ -35,10 +35,10 @@
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 dark:bg-gray-900"
                 role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
-                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">
+                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-300" id="modal-headline">
                     Change settings
                 </h3>
                 
@@ -58,35 +58,55 @@
                 <div>
                     <div class="mt-3 sm:mt-5">
                         
-                        <div class="mt-2">
+                        <div class="flex flex-col mt-2">
+                            <x-form.input-group
+                                label="Preferred API"
+                                for="api"
+                                :error="$errors->first('settings.api')">
+                                <select
+                                    class="form-select dark:bg-gray-700 dark:text-gray-100"
+                                    wire:model.defer="settings.api"
+                                    name="api"
+                                    id="api"
+                                    required
+                                    autofocus
+                                >
+                                    <option value="{{ \App\Models\User::SETTING_API_MAINNET }}">ARK Mainnet</option>
+                                    <option value="{{ \App\Models\User::SETTING_API_DEVNET }}">ARK Devnet</option>
+                                </select>
+                            </x-form.input-group>
+                            
                             <x-form.input-group
                                 for="dark"
+                                label="Enable dark mode"
                                 :error="$errors->first('settings.dark')"
                             >
-                                <input
-                                    type="checkbox"
-                                    wire:model.defer="settings.dark"
-                                    :value="dark"
-                                    class="form-checkbox"
-                                    name="dark"
-                                    id="dark"
-                                />
-                                
-                                Dark Mode
+                                <div class="flex items-center space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        wire:model.defer="settings.dark"
+                                        class="form-checkbox"
+                                        name="dark"
+                                        id="dark"
+                                    />
+                                    <span class="text-gray-600 dark:text-gray-200">Enable</span>
+                                </div>
                             </x-form.input-group>
+                            
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-5 sm:mt-6">
                     <span class="flex w-full rounded-md shadow-sm">
-                        <button
+                        <x-button
                             wire:click="saveSettings"
                             type="button"
-                            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo sm:text-sm sm:leading-5"
+                            class="block"
+                            class="w-full"
                         >
                             Save changes
-                        </button>
+                        </x-button>
                     </span>
                 </div>
 

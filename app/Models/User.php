@@ -19,6 +19,9 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use CanResetPassword;
 
+    const SETTING_API_MAINNET = 'mainnet';
+    const SETTING_API_DEVNET = 'devnet';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,6 +33,7 @@ class User extends Authenticatable
         'password',
         'timezone',
         'dark',
+        'api',
     ];
 
     /**
@@ -65,7 +69,7 @@ class User extends Authenticatable
 
     public function getSettings()
     {
-        $keys = collect(['dark']);
+        $keys = collect(['dark', 'api']);
 
         return $keys->mapWithKeys(function ($key) {
             return [$key => $this->{$key}];
