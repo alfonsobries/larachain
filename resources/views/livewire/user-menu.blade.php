@@ -15,7 +15,7 @@
             <div>
                 <button @click="open = !open"
                     class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300"
-                    id="user-menu" aria-label="User menu" aria-haspopup="true" x-bind:aria-expanded="open">
+                    id="user-menu" aria-label="User menu" aria-haspopup="true" :aria-expanded="open">
                     <img class="w-8 h-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="User photo">
                 </button>
             </div>
