@@ -32,6 +32,27 @@
 </x-slot>
 
 <div>
+    <x-details class="mb-4">
+        @foreach ($rows as $name => $label)
+        <x-details-detail :label="$label">
+            @switch($name)
+                @case('username')
+                {{ \Arr::get($wallet, 'username', 'Unknown') }}
+                @break
+                @case('forged_blocks')
+                {{ '@TODO' }}
+                @break
+                @case('voters')
+                {{ '@TODO' }}
+                @break
+                @case('voting_for')
+                {{ '@TODO' }}
+                @break
+            @endswitch
+        </x-detail-detail>
+        @endforeach
+    </x-details>
+
     <livewire:wallet-transactions-table :wallet="$wallet" />
 </div>
 

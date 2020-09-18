@@ -8,22 +8,20 @@ use Livewire\Component;
 class WalletsShow extends Component
 {
     const ROWS = [
-        'sender' => 'Sender',
-        'recipient' => 'Recipient',
-        'type' => 'Transaction type',
-        'confirmations' => 'Confirmations',
-        'amount' => 'Amount',
-        'fee' => 'Fee',
-        'timestamp' => 'Timestamp',
-        'nonce' => 'Nonce',
-        'blockId' => 'Block id',
+        'username' => 'Username',
+        'forged_blocks' => 'Forged Blocks',
+        'voters' => 'Voters',
+        'voting_for' => 'Voting For',
     ];
 
     protected $wallet;
+    public $rows;
 
     public function mount()
     {
         $this->wallet = ArkExplorer::getWallet(request()->id)->json('data');
+
+        $this->rows = self::ROWS;
     }
 
     public function render()
