@@ -43,7 +43,7 @@
                         @break
 
                         @case('generator')
-                        <x-link>{{ \Arr::get($block, 'generator.username', 'Unknown') }}</x-link>
+                        <x-link href="{{ route('wallets.show', ['id' => \Arr::get($block, 'generator.address')]) }}">{{ \Arr::get($block, 'generator.username', 'Unknown') }}</x-link>
                         @break                
                     @endswitch
                 </div>
