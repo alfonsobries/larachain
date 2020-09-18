@@ -14,6 +14,7 @@
                     ]" />
         </x-slot>
         <x-slot name="right">
+            
             <div class="flex">
                 <div class="flex flex-col px-4">
                     <span class="text-sm text-gray-500 uppercase">Balance</span>
@@ -26,6 +27,8 @@
                         <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $username }}</span>
                     </div>
                 @endif
+
+                <livewire:save-wallet-button />
             </div>
         </x-slot>
     </x-header>
