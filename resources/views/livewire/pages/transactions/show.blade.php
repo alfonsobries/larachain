@@ -34,17 +34,21 @@
             @break
 
             @case('sender')
-            <x-link title="{{ $transaction['sender'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['sender']]) }}">
-                {{ $sender['username'] }}
-            </x-link>
-            {{ $transaction['sender'] }}
+            <div class="flex flex-col">
+                <x-link title="{{ $transaction['sender'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['sender']]) }}">
+                    {{ \Arr::get($sender, 'username', 'Unknown') }}
+                </x-link>
+                {{ $transaction['sender'] }}
+            </div>
             @break
 
             @case('recipient')
-            <x-link title="{{ $transaction['recipient'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['recipient']]) }}">
-                {{ $recipient['username'] }}
-            </x-link>
-            {{ $transaction['recipient'] }}
+            <div class="flex flex-col">
+                <x-link title="{{ $transaction['recipient'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['recipient']]) }}">
+                    {{ \Arr::get($recipient, 'username', 'Unknown') }}
+                </x-link>
+                {{ $transaction['recipient'] }}
+            </div>
             @break
             
             @case('blockId')

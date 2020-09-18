@@ -305,8 +305,10 @@ class ArkExplorer
             self::lastBlockEndpoint() => FakeArkExplorer::getLastBlock(),
             self::getTransactionsSearchEndpoint() => FakeArkExplorer::searchTransactions(),
             self::getTransactionsEndpoint() => FakeArkExplorer::transactions(),
+            self::getTransactionTypesEndpoint() => FakeArkExplorer::getTransactionTypes(),
             self::getWalletsEndpoint() => FakeArkExplorer::getWallets(),
             self::getWalletEndpoint('*') => FakeArkExplorer::getWallet('*'),
+            self::getTransactionEndpoint('*') => FakeArkExplorer::getTransaction('*'),
         ], $override));
     }
 }
