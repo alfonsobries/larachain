@@ -203,6 +203,34 @@ class ArkExplorer
 
         return Http::get($enpdoint);
     }
+    
+    /** 
+     * Returns the single wallet endpoint
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWalletVotesEndpoint($id, array $query = [])
+    {
+        $apiUrl = sprintf('%s/wallets/%s/votes', self::getApiUrl(), $id);
+
+        if (count($query)) {
+            return $apiUrl . '?' . http_build_query($query);
+        }
+
+        return $apiUrl;
+    }
+
+    /** 
+     * Returns the wallet by id
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWalletVotes($id, array $query = [])
+    {
+        $enpdoint = self::getWalletVotesEndpoint($id, $query);
+
+        return Http::get($enpdoint);
+    }
 
     /** 
      * Returns the single transaction endpoint

@@ -39,14 +39,27 @@
                 @case('username')
                 {{ \Arr::get($wallet, 'username', 'Unknown') }}
                 @break
+                @case('rank')
+                    @if($rank = \Arr::get($wallet, 'attributes.delegate.rank'))
+                        {{ number_format($rank) }}
+                    @else
+                        -
+                    @endif
+                @break
                 @case('forged_blocks')
-                {{ '@TODO' }}
+                    @if($producedBlocks = \Arr::get($wallet, 'attributes.delegate.producedBlocks'))
+                        {{ number_format($producedBlocks) }}
+                    @else
+                        -
+                    @endif
                 @break
                 @case('voters')
-                {{ '@TODO' }}
+                {{ number_format($totalVotes) }}
                 @break
                 @case('voting_for')
-                {{ '@TODO' }}
+                    <x-link title="{{ $votingFor['address'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $votingFor['address']]) }}">
+                        {{ \Arr::get($votingFor, 'username', 'Unknown') }}
+                    </x-link>
                 @break
             @endswitch
         </x-detail-detail>
