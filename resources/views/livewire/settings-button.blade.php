@@ -1,4 +1,7 @@
-<div x-data="{ open: false }" x-init="
+<div x-data="{
+        open: false,
+        dark: settings.dark
+    }" x-init="
         () => document.body.classList.add('overflow-hidden');
         $watch('open', value => {
             if (value === true) { document.body.classList.add('overflow-hidden') } 
@@ -63,6 +66,7 @@
                                 <input
                                     type="checkbox"
                                     wire:model.defer="settings.dark"
+                                    :value="dark"
                                     class="form-checkbox"
                                     name="dark"
                                     id="dark"
