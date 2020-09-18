@@ -18,12 +18,12 @@
                 <div class="flex flex-col px-4">
                     <span class="text-sm text-gray-500 uppercase">Balance</span>
                     <span
-                        class="font-semibold">{{ number_format($wallet['balance'] / \App\Services\Ark\ArkExplorer::AMOUNT_DECIMALS) }}Ѧ</span>
+                        class="font-semibold text-gray-800 dark:text-gray-200">{{ number_format($wallet['balance'] / \App\Services\Ark\ArkExplorer::AMOUNT_DECIMALS) }}Ѧ</span>
                 </div>
                 @if ($username = \Arr::get($wallet, 'username'))
                     <div class="flex flex-col px-4 border-l">
                         <span class="text-sm text-gray-500 uppercase">Address</span>
-                        <span class="font-semibold">{{ $username }}</span>
+                        <span class="font-semibold text-gray-800 dark:text-gray-200">{{ $username }}</span>
                     </div>
                 @endif
             </div>
@@ -57,9 +57,13 @@
                 {{ number_format($totalVotes) }}
                 @break
                 @case('voting_for')
+                    @if(!$votingFor)
+                    NA
+                    @else
                     <x-link title="{{ $votingFor['address'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $votingFor['address']]) }}">
                         {{ \Arr::get($votingFor, 'username', 'Unknown') }}
                     </x-link>
+                    @endif
                 @break
             @endswitch
         </x-detail-detail>

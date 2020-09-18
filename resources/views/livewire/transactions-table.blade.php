@@ -26,8 +26,8 @@
     </div>
     
     @if (!$hidePagination && $pagination)
-    <div class="hidden px-6 py-4 lg:block dark:bg-gray-100">
-        {{ $pagination->links() }}
+    <div class="hidden px-6 py-4 lg:block">
+        {{ $pagination->links('full-pagination') }}
     </div>
     <div class="px-6 py-4 lg:hidden">
         {{ $pagination->links('pagination') }}

@@ -2,8 +2,7 @@
         open: false,
         dark: settings.dark
     }" x-init="
-        () => document.body.classList.add('overflow-hidden');
-        $watch('open', value => {
+        () => $watch('open', value => {
             if (value === true) { document.body.classList.add('overflow-hidden') } 
             else { document.body.classList.remove('overflow-hidden') }
         });" class="ml-2">

@@ -27,7 +27,10 @@ class WalletsShow extends Component
         $votesResponse = ArkExplorer::getWalletVotes(request()->id, ['limit' => 1]);
 
         $this->totalVotes = $this->extractTotalVotesFromVotesResponse($votesResponse);
-        $this->votingFor = $this->getVotingFromFromVotesResponse($votesResponse);
+
+        if ($this->totalVotes > 0)  {
+            $this->votingFor = $this->getVotingFromFromVotesResponse($votesResponse);
+        }
 
         $this->rows = self::ROWS;
     }

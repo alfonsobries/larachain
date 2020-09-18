@@ -2,6 +2,11 @@ require('./bootstrap');
 
 Livewire.on('settingsUpdated', (settings) => {
   localStorage.setItem('settings', JSON.stringify(settings));
-
-  window.location.reload()
+  if (!window.settings || (settings.api !== window.settings.api)) {
+    window.location.href="/"
+  } else {
+    window.location.reload()
+  }
 })
+
+
