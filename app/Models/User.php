@@ -62,4 +62,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function getSettings()
+    {
+        $keys = collect(['dark']);
+
+        return $keys->mapWithKeys(function ($key) {
+            return [$key => $this->{$key}];
+        })->toArray();
+    }
 }
