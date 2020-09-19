@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages;
 
+use App\Models\Wallet;
 use App\Services\Ark\ArkExplorer;
 use Livewire\Component;
 
@@ -17,33 +18,19 @@ class WalletsShow extends Component
 
     protected $wallet;
     public $rows;
-    public $totalVotes;
-    public $votingFor;
+    public $walletId;
 
     public function mount()
     {
-        $this->wallet = ArkExplorer::getWallet(request()->id)->json('data');
-
-        $votesResponse = ArkExplorer::getWalletVotes(request()->id, ['limit' => 1]);
-
-        $this->totalVotes = $this->extractTotalVotesFromVotesResponse($votesResponse);
-
-        if ($this->totalVotes > 0)  {
-            $this->votingFor = $this->getVotingFromFromVotesResponse($votesResponse);
-        }
+        $this->wallet = Wallet::updateOrCreateFromApi(request()->id);
+        $this->walletId = $this->wallet->id;
 
         $this->rows = self::ROWS;
     }
 
-    private function extractTotalVotesFromVotesResponse($votesResponse)
+    public function refreshWallet()
     {
-        return $votesResponse->json('meta.totalCount');
-    }
-
-    private function getVotingFromFromVotesResponse($votesResponse)
-    {
-        $latestVote = $votesResponse->json('data.0');
-        return ArkExplorer::getBlock($latestVote['blockId'])->json('data.generator');
+        $this->wallet = Wallet::find($this->walletId)->refreshFromApi();
     }
 
     public function render()
