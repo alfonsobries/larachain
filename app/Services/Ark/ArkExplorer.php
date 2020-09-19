@@ -56,11 +56,7 @@ class ArkExplorer
 
     protected static function getApiUrl()
     {
-        if (auth()->user()) {
-            $api = auth()->user()->api;
-        } else {
-            $api = guess_api_from_session();
-        }
+        $api = get_current_api();
 
         return config('services.ark.'.$api);
     }
