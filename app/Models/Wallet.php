@@ -86,4 +86,9 @@ class Wallet extends Model
 
         return ArkExplorer::getBlock($latestVote['blockId'])->json('data.generator');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

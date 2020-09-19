@@ -75,4 +75,9 @@ class User extends Authenticatable
             return [$key => $this->{$key}];
         })->toArray();
     }
+
+    public function wallets()
+    {
+        return $this->belongsToMany(Wallet::class);
+    }
 }

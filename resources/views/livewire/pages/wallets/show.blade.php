@@ -28,7 +28,9 @@
                     </div>
                 @endif
 
-                <livewire:save-wallet-button />
+                @if(auth()->user())
+                <livewire:save-wallet-button :wallet-id="$wallet->id" />
+                @endif
             </div>
         </x-slot>
     </x-header>
