@@ -14,53 +14,51 @@
         </x-slot>
     </x-header>
 </x-slot>
-<div class="overflow-hidden bg-white shadow sm:rounded-md">
-    <ul>
-        @foreach ($rows as $name => $label)
-            <li class="px-4 py-4 transition duration-150 ease-in-out transaction hover:bg-gray-50 sm:px-6">
-                <span class="flex items-center justify-between text-sm font-medium leading-5 text-red-900 truncate">
-                    {{ $label }}
-                </span>
-                <div class="flex flex-col mr-6 text-sm leading-5 text-gray-500">
-                    @switch($name)
-                        @case('confirmations')
-                        {{ number_format($transaction[$name]) }}
-                        @break
 
-                        @case('fee')
-                        @case('amount')
-                        @case('nonce')
-                        {{ number_format($transaction[$name] / \App\Services\Ark\ArkExplorer::AMOUNT_DECIMALS) }} Ѧ
-                        @break
+<x-details>
+    @foreach ($rows as $name => $label)
+    <x-details-detail :label="$label">
+        @switch($name)
+            @case('confirmations')
+            {{ number_format($transaction[$name]) }}
+            @break
 
-                        @case('timestamp')
-                        {{ \Carbon\Carbon::createFromTimestamp($transaction['timestamp']['unix'])->format('Y-m-d H:i:s') }}
-                        @break
+            @case('fee')
+            @case('amount')
+            @case('nonce')
+            {{ number_format($transaction[$name] / \App\Services\Ark\ArkExplorer::AMOUNT_DECIMALS) }} Ѧ
+            @break
 
-                        @case('sender')
-                        <x-link title="{{ $transaction['sender'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['sender']]) }}">
-                            {{ $sender['username'] }}
-                        </x-link>
-                        {{ $transaction['sender'] }}
-                        @break
+            @case('timestamp')
+            {{ \Carbon\Carbon::createFromTimestamp($transaction['timestamp']['unix'])->format('Y-m-d H:i:s') }}
+            @break
 
-                        @case('recipient')
-                        <x-link title="{{ $transaction['recipient'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['recipient']]) }}">
-                            {{ $recipient['username'] }}
-                        </x-link>
-                        {{ $transaction['recipient'] }}
-                        @break
-                        
-                        @case('blockId')
-                        <x-link title="{{ $transaction['blockId'] }}" class="block truncate" href="{{ route('blocks.show', ['id' => $transaction['blockId']]) }}">{{  $transaction['blockId'] }}</x-link>
-                        @break
+            @case('sender')
+            <div class="flex flex-col">
+                <x-link title="{{ $transaction['sender'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['sender']]) }}">
+                    {{ \Arr::get($sender, 'username', 'Unknown') }}
+                </x-link>
+                {{ $transaction['sender'] }}
+            </div>
+            @break
 
-                        @case('type')
-                        {{ $transactionType }}
-                        @break
-                    @endswitch
-                </div>
-            </li>
-        @endforeach
-    </ul>
-</div>
+            @case('recipient')
+            <div class="flex flex-col">
+                <x-link title="{{ $transaction['recipient'] }}" class="block truncate" href="{{ route('wallets.show', ['id' => $transaction['recipient']]) }}">
+                    {{ \Arr::get($recipient, 'username', 'Unknown') }}
+                </x-link>
+                {{ $transaction['recipient'] }}
+            </div>
+            @break
+            
+            @case('blockId')
+            <x-link title="{{ $transaction['blockId'] }}" class="block truncate" href="{{ route('blocks.show', ['id' => $transaction['blockId']]) }}">{{  $transaction['blockId'] }}</x-link>
+            @break
+
+            @case('type')
+            {{ $transactionType }}
+            @break
+        @endswitch
+    </x-detail-detail>
+    @endforeach
+</x-details>

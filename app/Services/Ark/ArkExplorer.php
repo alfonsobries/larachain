@@ -2,16 +2,16 @@
 
 namespace App\Services\Ark;
 
+use App\Services\Ark\Testing\FakeArkExplorer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
-use App\Services\Ark\Testing\FakeArkExplorer;
 
 class ArkExplorer
 {
     /**
-     * For some reason the ark epoch that is the date used to query 
+     * For some reason the ark epoch that is the date used to query
      * transactions between dates has a `1490101200` offset
-     * issue: https://github.com/ArkEcosystem/deployer/issues/38
+     * issue: https://github.com/ArkEcosystem/deployer/issues/38.
      */
     const EPOCH_OFFSET = 1490101200;
     const AMOUNT_DECIMALS = 100000000;
@@ -21,7 +21,7 @@ class ArkExplorer
         $apiUrl = sprintf('%s/wallets', self::getApiUrl());
 
         if (count($query)) {
-            return $apiUrl . '?' . http_build_query($query);
+            return $apiUrl.'?'.http_build_query($query);
         }
 
         return $apiUrl;
@@ -32,7 +32,7 @@ class ArkExplorer
         $apiUrl = sprintf('%s/transactions', self::getApiUrl());
 
         if (count($query)) {
-            return $apiUrl . '?' . http_build_query($query);
+            return $apiUrl.'?'.http_build_query($query);
         }
 
         return $apiUrl;
@@ -43,7 +43,7 @@ class ArkExplorer
         $apiUrl = sprintf('%s/blocks', self::getApiUrl());
 
         if (count($query)) {
-            return $apiUrl . '?' . http_build_query($query);
+            return $apiUrl.'?'.http_build_query($query);
         }
 
         return $apiUrl;
@@ -56,7 +56,13 @@ class ArkExplorer
 
     protected static function getApiUrl()
     {
-        return config('services.ark.endpoint');
+        if (auth()->user()) {
+            $api = auth()->user()->api;
+        } else {
+            $api = guess_api_from_session();
+        }
+
+        return config('services.ark.'.$api);
     }
 
     /**
@@ -70,7 +76,6 @@ class ArkExplorer
 
         return Http::get($enpdoint);
     }
-
 
     public static function transactions(array $query = [])
     {
@@ -91,11 +96,11 @@ class ArkExplorer
         return Http::post($enpdoint, $query);
     }
 
-    /** 
-     * Search transactions between to dates
+    /**
+     * Search transactions between to dates.
      * @param \Carbon\Carbon $from
      * @param \Carbon\Carbon $to
-     * 
+     *
      * @return array
      */
     public static function transactionsBetween(Carbon $from, Carbon $to)
@@ -104,15 +109,15 @@ class ArkExplorer
             'timestamp' => [
                 'from' => self::getArkEpoch($from),
                 'to' => self::getArkEpoch($to),
-            ]
+            ],
         ];
 
         return self::searchTransactions($query)->json();
     }
 
-    /** 
-     * Returns the last block endpoint
-     * 
+    /**
+     * Returns the last block endpoint.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function lastBlockEndpoint()
@@ -120,9 +125,9 @@ class ArkExplorer
         return sprintf('%s/blocks/last', self::getApiUrl());
     }
 
-    /** 
-     * Returns the last block
-     * 
+    /**
+     * Returns the last block.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getLastBlock()
@@ -132,9 +137,9 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-    /** 
-     * Returns the block by id
-     * 
+    /**
+     * Returns the block by id.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getBlock($id)
@@ -144,9 +149,9 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-    /** 
-     * Returns the last block endpoint
-     * 
+    /**
+     * Returns the last block endpoint.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getBlockEndpoint($id)
@@ -154,9 +159,9 @@ class ArkExplorer
         return sprintf('%s/blocks/%s', self::getApiUrl(), $id);
     }
 
-    /** 
-     * Returns the single wallet endpoint
-     * 
+    /**
+     * Returns the single wallet endpoint.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getWalletEndpoint($id)
@@ -164,9 +169,9 @@ class ArkExplorer
         return sprintf('%s/wallets/%s', self::getApiUrl(), $id);
     }
 
-    /** 
-     * Returns the wallet by id
-     * 
+    /**
+     * Returns the wallet by id.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getWallet($id)
@@ -176,9 +181,9 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-    /** 
-     * Returns the single wallet endpoint
-     * 
+    /**
+     * Returns the single wallet endpoint.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getWalletTransactionsEndpoint($id, array $query = [], $modifier = '')
@@ -186,15 +191,15 @@ class ArkExplorer
         $apiUrl = sprintf('%s/wallets/%s/transactions%s', self::getApiUrl(), $id, $modifier);
 
         if (count($query)) {
-            return $apiUrl . '?' . http_build_query($query);
+            return $apiUrl.'?'.http_build_query($query);
         }
 
         return $apiUrl;
     }
 
-    /** 
-     * Returns the wallet by id
-     * 
+    /**
+     * Returns the wallet by id.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getWalletTransactions($id, array $query = [], $modifier = '')
@@ -204,9 +209,37 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-    /** 
-     * Returns the single transaction endpoint
-     * 
+    /**
+     * Returns the single wallet endpoint.
+     *
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWalletVotesEndpoint($id, array $query = [])
+    {
+        $apiUrl = sprintf('%s/wallets/%s/votes', self::getApiUrl(), $id);
+
+        if (count($query)) {
+            return $apiUrl.'?'.http_build_query($query);
+        }
+
+        return $apiUrl;
+    }
+
+    /**
+     * Returns the wallet by id.
+     *
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function getWalletVotes($id, array $query = [])
+    {
+        $enpdoint = self::getWalletVotesEndpoint($id, $query);
+
+        return Http::get($enpdoint);
+    }
+
+    /**
+     * Returns the single transaction endpoint.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getTransactionEndpoint($id)
@@ -214,7 +247,7 @@ class ArkExplorer
         return sprintf('%s/transactions/%s', self::getApiUrl(), $id);
     }
 
-        /**
+    /**
      * @param array $query
      *
      * @return \Illuminate\Http\Client\Response`
@@ -226,7 +259,6 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-
     public static function wallets(array $query = [])
     {
         $response = self::fetchWallets($query);
@@ -234,9 +266,9 @@ class ArkExplorer
         return $response;
     }
 
-    /** 
-     * Returns the transaction by id
-     * 
+    /**
+     * Returns the transaction by id.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getTransaction($id)
@@ -246,9 +278,9 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-    /** 
-     * Returns the single transaction types endpint
-     * 
+    /**
+     * Returns the single transaction types endpint.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getTransactionTypesEndpoint()
@@ -256,10 +288,9 @@ class ArkExplorer
         return sprintf('%s/transactions/types', self::getApiUrl());
     }
 
-
-    /** 
-     * Returns the transaction types
-     * 
+    /**
+     * Returns the transaction types.
+     *
      * @return \Illuminate\Http\Client\Response
      */
     public static function getTransactionTypes()
@@ -281,7 +312,6 @@ class ArkExplorer
         return Http::get($enpdoint);
     }
 
-
     public static function blocks(array $query = [])
     {
         $response = self::fetchBlocks($query);
@@ -290,7 +320,7 @@ class ArkExplorer
     }
 
     /**
-     * Return the date timestamp with the same offset that ark uses
+     * Return the date timestamp with the same offset that ark uses.
      * @return int
      */
     protected static function getArkEpoch(Carbon $date)
@@ -298,15 +328,16 @@ class ArkExplorer
         return $date->timestamp - self::EPOCH_OFFSET;
     }
 
-
     public static function fake($override = [])
     {
         Http::fake(array_merge([
             self::lastBlockEndpoint() => FakeArkExplorer::getLastBlock(),
             self::getTransactionsSearchEndpoint() => FakeArkExplorer::searchTransactions(),
             self::getTransactionsEndpoint() => FakeArkExplorer::transactions(),
+            self::getTransactionTypesEndpoint() => FakeArkExplorer::getTransactionTypes(),
             self::getWalletsEndpoint() => FakeArkExplorer::getWallets(),
             self::getWalletEndpoint('*') => FakeArkExplorer::getWallet('*'),
+            self::getTransactionEndpoint('*') => FakeArkExplorer::getTransaction('*'),
         ], $override));
     }
 }

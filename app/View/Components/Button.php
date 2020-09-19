@@ -35,7 +35,7 @@ class Button extends Component
      * 
      * @var string
      */
-    protected $defaultClasses = 'px-6 py-3 text-center text-sm leading-none text-white bg-gray-800 border border-transparent rounded-md focus:border-gray-600 focus:outline-none focus:shadow-outline-gray hover:bg-gray-600';
+    protected $defaultClasses = 'px-6 py-3 text-center text-sm leading-none text-white bg-gray-800 border border-transparent rounded-md focus:border-gray-600 focus:outline-none focus:shadow-outline-gray hover:bg-gray-600 dark:bg-gray-800';
     
     /**
      * List of possible variants

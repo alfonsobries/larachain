@@ -67,7 +67,8 @@ DB_PASSWORD=
 You can also update the API URL for another valid ark API endpoint.
 
 ```
-API_URL=https://dexplorer.ark.io/api 
+ARK_MAINNET=https://explorer.ark.io/api
+ARK_DEVNET=https://dexplorer.ark.io/api
 ```
 
 #### 7. Once the database is set run the migrations

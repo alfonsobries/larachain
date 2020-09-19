@@ -31,6 +31,46 @@ class FakeArkExplorer extends ArkExplorer
         return Http::response($body, 200);
     }
 
+    public static function getTransaction($id)
+    {
+        $transaction = self::buildTransaction();
+
+        $body = [
+            'data' => $transaction,
+        ];
+
+        return Http::response($body, 200);
+    }
+
+    public static function getTransactionTypes()
+    {
+        $types = [
+            1 => [
+                "Transfer" => 0,
+                "SecondSignature" => 1,
+                "DelegateRegistration" => 2,
+                "Vote" => 3,
+                "MultiSignature" => 4,
+                "Ipfs" => 5,
+                "MultiPayment" => 6,
+                "DelegateResignation" => 7,
+                "HtlcLock" => 8,
+                "HtlcClaim" => 9,
+                "HtlcRefund" => 10,
+            ],
+            2 => [
+                "Entity" => 6
+            ]
+        ];
+
+        $body = [
+            'data' => $types,
+        ];
+
+        return Http::response($body, 200);
+    }
+
+
     /** 
      * Returns the wallets
      * 
@@ -48,7 +88,35 @@ class FakeArkExplorer extends ArkExplorer
      */
     public static function getWallet($id)
     {
-        return Http::response([], 200);
+        $wallet = self::buildWallet();
+
+        $body = [
+            'data' => $wallet,
+        ];
+
+        return Http::response($body, 200);
+    }
+
+    /** 
+     * Build a random wallet
+     * 
+     * @return \Illuminate\Http\Client\Response
+     */
+    public static function buildWallet($overrides = [])
+    {
+        $faker = Factory::create();
+
+        return array_merge([
+            "address" => $faker->sha256,
+            "publicKey" => $faker->sha256,
+            "nonce" => $faker->numberBetween(1, 100),
+            "balance" => $faker->numberBetween(0, 200000000),
+            "attributes" => [],
+            "isDelegate" => $faker->boolean,
+            "isResigned" => $faker->boolean,
+            "vote" => $faker->sha256,
+            "username" => $faker->userName,
+        ], $overrides);
     }
 
     /** 

@@ -10,12 +10,14 @@
         </div>
     @endguest
 
+    <livewire:settings-button />
+
     @auth
         <div @click.away="open = false" class="relative ml-3" x-data="{ open: false }">
             <div>
                 <button @click="open = !open"
                     class="flex text-sm transition duration-150 ease-in-out border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300"
-                    id="user-menu" aria-label="User menu" aria-haspopup="true" x-bind:aria-expanded="open">
+                    id="user-menu" aria-label="User menu" aria-haspopup="true" :earia-expanded="open">
                     <img class="w-8 h-8 rounded-full" src="{{ auth()->user()->profile_photo_url }}" alt="User photo">
                 </button>
             </div>
@@ -37,6 +39,10 @@
                     <a href="{{ route('profile.show') }}"
                         class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
                         role="menuitem">Settings</a>
+
+                    <a href="{{ route('wallets.mine') }}"
+                        class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
+                        role="menuitem">My wallets</a>
                         
                     <button
                         wire:loading.attr="disabled"
@@ -48,4 +54,7 @@
             </div>
         </div>
     @endauth
+    
+
+    
 </div>

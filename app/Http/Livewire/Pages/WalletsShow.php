@@ -2,28 +2,35 @@
 
 namespace App\Http\Livewire\Pages;
 
+use App\Models\Wallet;
 use App\Services\Ark\ArkExplorer;
 use Livewire\Component;
 
 class WalletsShow extends Component
 {
     const ROWS = [
-        'sender' => 'Sender',
-        'recipient' => 'Recipient',
-        'type' => 'Transaction type',
-        'confirmations' => 'Confirmations',
-        'amount' => 'Amount',
-        'fee' => 'Fee',
-        'timestamp' => 'Timestamp',
-        'nonce' => 'Nonce',
-        'blockId' => 'Block id',
+        'username' => 'Username',
+        'forged_blocks' => 'Forged Blocks',
+        'rank' => 'Rank',
+        'voters' => 'Voters',
+        'voting_for' => 'Voting For',
     ];
 
     protected $wallet;
+    public $rows;
+    public $walletId;
 
     public function mount()
     {
-        $this->wallet = ArkExplorer::getWallet(request()->id)->json('data');
+        $this->wallet = Wallet::updateOrCreateFromApi(request()->id);
+        $this->walletId = $this->wallet->id;
+
+        $this->rows = self::ROWS;
+    }
+
+    public function refreshWallet()
+    {
+        $this->wallet = Wallet::find($this->walletId)->refreshFromApi();
     }
 
     public function render()
