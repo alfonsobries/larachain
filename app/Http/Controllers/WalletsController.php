@@ -12,7 +12,7 @@ class WalletsController extends Controller
             abort(403, 'this section is for user');
         }
 
-        $wallets = auth()->user()->wallets()->paginate(20);
+        $wallets = auth()->user()->wallets()->where('api', get_current_api())->paginate(20);
         $headers = WalletsTable::HEADERS;
         
         return view('wallets.mine')->with(compact('wallets', 'headers'));

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\WalletNotFoundException;
 use Illuminate\Support\Arr;
 use App\Services\Ark\ArkExplorer;
 use Illuminate\Database\Eloquent\Model;
@@ -20,34 +21,41 @@ class Wallet extends Model
         'rank',
         'voting_for_address',
         'voting_for_username',
+        'api',
     ];
 
-    public static function updateOrCreateFromApi($walletAddress)
+    public static function updateOrCreateFromApi($walletAddress, $api)
     {
-        $model = self::where('address', $walletAddress)->first();
+        $model = self::where('address', $walletAddress)->where('api', $api)->first();
 
         if ($model) {
             return $model;
         }
 
-        $data = self::buildWalletData($walletAddress);
+        $data = self::buildWalletData($walletAddress,  $api);
 
         return self::create($data);
     }
 
     public function refreshFromApi()
     {
-        $data = self::buildWalletData($this->address);
+        $data = self::buildWalletData($this->address, $this->api);
         return tap($this)->update($data);
     }
 
-    private static function buildWalletData($walletAddress)
+    private static function buildWalletData($walletAddress, $api)
     {
         $wallet = self::fetchWallet($walletAddress);
+        
+        if (!$wallet) {
+            throw new WalletNotFoundException();
+        }
+
         $votesResponse = self::fetchWalletVotes($walletAddress);
         $totalVotes = self::extractTotalVotesFromVotesResponse($votesResponse);
 
         $data = [
+            'api' => $api,
             'address' => Arr::get($wallet, 'address'),
             'username' => Arr::get($wallet, 'username'),
             'balance' => Arr::get($wallet, 'balance'),

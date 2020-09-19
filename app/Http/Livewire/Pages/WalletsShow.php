@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Pages;
 
+use App\Exceptions\WalletNotFoundException;
 use App\Models\Wallet;
-use App\Services\Ark\ArkExplorer;
 use Livewire\Component;
 
 class WalletsShow extends Component
@@ -18,14 +18,19 @@ class WalletsShow extends Component
 
     protected $wallet;
     public $rows;
-    public $walletId;
+    public $walletId = null;
 
     public function mount()
     {
-        $this->wallet = Wallet::updateOrCreateFromApi(request()->id);
-        $this->walletId = $this->wallet->id;
-
         $this->rows = self::ROWS;
+        
+        try {
+            $this->wallet = Wallet::updateOrCreateFromApi(request()->id, get_current_api());
+        } catch (WalletNotFoundException $e) {
+            return;
+        }
+        
+        $this->walletId = $this->wallet->id;
     }
 
     public function refreshWallet()
