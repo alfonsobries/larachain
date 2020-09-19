@@ -10,6 +10,8 @@
         </div>
     @endguest
 
+    <livewire:settings-button />
+
     @auth
         <div @click.away="open = false" class="relative ml-3" x-data="{ open: false }">
             <div>
@@ -37,6 +39,10 @@
                     <a href="{{ route('profile.show') }}"
                         class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
                         role="menuitem">Settings</a>
+
+                    <a href="{{ route('wallets.mine') }}"
+                        class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
+                        role="menuitem">My wallets</a>
                         
                     <button
                         wire:loading.attr="disabled"
@@ -50,5 +56,5 @@
     @endauth
     
 
-    <livewire:settings-button />
+    
 </div>

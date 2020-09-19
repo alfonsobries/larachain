@@ -44,6 +44,10 @@
                     class="block px-4 py-2 text-base font-medium text-gray-500 transition duration-150 ease-in-out hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100"
                     role="menuitem">Settings</a>
 
+                <a href="{{ route('wallets.mine') }}"
+                        class="block px-4 py-2 text-sm text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100"
+                        role="menuitem">My wallets</a>
+
                 <button
                     wire:loading.attr="disabled"
                     wire:click="logout"

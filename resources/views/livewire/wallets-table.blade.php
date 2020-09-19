@@ -4,7 +4,7 @@
     @endif
 
     <table wire:key="table" class="hidden w-full divide-y divide-gray-100 dark:divide-gray-800 md:table">
-        <x-table-header :orderable="$orderable" :headers="$headers" :orderBy="$orderBy" />
+        <x-table-header :orderable="[]" :headers="$headers" :orderBy="$orderBy" />
 
         <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
             @if ($pagination)
